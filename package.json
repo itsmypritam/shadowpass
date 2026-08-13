@@ -1,0 +1,68 @@
+{
+  "name": "shadowpass",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ShadowPass - privacy-first eligibility verification on Midnight (Compact + zero-knowledge)",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "compile": "compact compile contract/shadow-pass.compact managed/shadow-pass",
+    "build": "npx tsc --noEmit || true",
+    "setup": "npx tsx scripts/setup.ts",
+    "deploy": "npx tsx scripts/deploy.ts",
+    "cli": "npx tsx scripts/cli.ts",
+    "check-balance": "npx tsx scripts/check-balance.ts",
+    "network": "npx tsx scripts/network.ts",
+    "proof-server:start": "docker compose up -d",
+    "proof-server:stop": "docker compose down",
+    "clean": "rm -rf managed .midnight-state.json .midnight-wallet-state src/dist",
+    "test": "vitest run",
+    "test:e2e": "tsx scripts/e2e-check.ts",
+    "server": "tsx src/server.ts",
+    "dev": "tsx scripts/dev.ts",
+    "dev:ui": "vite src",
+    "build:ui": "vite build src",
+    "preview:ui": "vite preview src"
+  },
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
+    "@midnight-ntwrk/dapp-connector-api": "4.0.1",
+    "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
+    "@midnight-ntwrk/midnight-js-fetch-zk-config-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-indexer-public-data-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-level-private-state-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-network-id": "4.1.1",
+    "@midnight-ntwrk/midnight-js-node-zk-config-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-protocol": "4.1.1",
+    "@midnight-ntwrk/midnight-js-types": "4.1.1",
+    "@midnight-ntwrk/midnight-js-utils": "4.1.1",
+    "@midnight-ntwrk/wallet-sdk": "1.2.0",
+    "@scure/bip39": "2.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rxjs": "^7.8.2",
+    "ws": "^8.21.1"
+  },
+  "devDependencies": {
+    "@midnight-ntwrk/testkit-js": "4.0.4",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3",
+    "vite": "^5.4.11",
+    "vite-plugin-top-level-await": "^1.4.1",
+    "vite-plugin-wasm": "^3.3.0",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "overrides": {
+    "@midnight-ntwrk/onchain-runtime-v3": "3.1.0"
+  },
+  "keywords": ["midnight", "blockchain", "zero-knowledge", "privacy"]
+}
