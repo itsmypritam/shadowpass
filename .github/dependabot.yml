@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "never"
+    open-pull-requests-limit: 0
+    # Keep the validated Vite 5 stack; do not auto-bump to breaking majors.
+    ignore:
+      - dependency-name: "vite"
+      - dependency-name: "vitest"
+      - dependency-name: "@vitejs/plugin-react"
