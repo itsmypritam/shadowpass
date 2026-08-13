@@ -39,6 +39,10 @@ testnet at:
 (verify with the [Midnight block explorer](https://explorer.midnight.network) —
 `Preview` network).
 
+A hosted, backend-less build of the frontend (reads state from the public
+Preview indexer; verifying runs in your browser via Lace) is deployed at
+[**shadowpass-wheat.vercel.app**](https://shadowpass-wheat.vercel.app).
+
 To run the interactive demo yourself: start Docker, run `npm run setup`, then
 `npm run dev`.
 
