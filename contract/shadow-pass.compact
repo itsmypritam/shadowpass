@@ -1,0 +1,63 @@
+// =============================================================================
+// ShadowPass — privacy-preserving eligibility verification (Level 1 MVP)
+// =============================================================================
+//
+// A user proves that a private eligibility value satisfies a public rule, and
+// only the boolean verification result ever becomes public. The underlying
+// value never leaves the zero-knowledge proof.
+//
+// ── PUBLIC LEDGER STATE (visible to everyone on-chain) ───────────────────────
+//   requirement        : the eligibility rule being enforced (a threshold)
+//   verificationCount  : how many verifications have been performed
+//   lastResult         : the disclosed outcome of the most recent verification
+//
+// ── PRIVATE WITNESS (stays secret inside the ZK proof) ───────────────────────
+//   eligibilityScore   : the user's actual score/attribute. It is a circuit
+//                        input, but it is never disclosed. It is only used to
+//                        satisfy the `assert` checks inside the circuit, and
+//                        it is committed into the zero-knowledge proof.
+// =============================================================================
+
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+export ledger requirement: Uint<64>;
+
+// Public counter of how many verifications have been recorded.
+export ledger verificationCount: Counter;
+
+// Public outcome of the last verification (true = eligible, false = not).
+export ledger lastResult: Boolean;
+
+// Constructor: publishes the rule and the initial, empty ledger state.
+// Everything assigned here is public by definition (ledger state is public).
+constructor() {
+  // Public rule: a score is "eligible" when it is at least this threshold.
+  const MIN_ELIGIBILITY_SCORE: Uint<64> = 60;
+  requirement = MIN_ELIGIBILITY_SCORE;
+  lastResult = false;
+}
+
+// verifyEligibility — the heart of ShadowPass.
+//
+//   claimedEligible   (circuit argument) : the result the user wants recorded.
+//   eligibilityScore  (circuit argument) : the user's PRIVATE value (witness).
+//
+// The circuit proves that the private score is consistent with the claimed
+// result. The score is never disclosed; only `lastResult` is made public via
+// disclose(). A claim that does not match the private value fails the circuit
+// and the transaction is rejected on-chain.
+export circuit verifyEligibility(claimedEligible: Boolean, eligibilityScore: Uint<64>): [] {
+  // Prove the private score backs the claim.
+  if (disclose(claimedEligible)) {
+    assert(eligibilityScore >= requirement, "Not eligible: private value is below the requirement");
+  } else {
+    assert(eligibilityScore < requirement, "Not ineligible: private value is at least the requirement");
+  }
+
+  // disclose() used deliberately: publish ONLY the verification result.
+  // The eligibility score stays inside the proof and is never revealed.
+  lastResult = disclose(claimedEligible);
+  verificationCount += 1;
+}

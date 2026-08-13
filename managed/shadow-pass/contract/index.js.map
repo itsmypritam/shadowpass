@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../",
+  "sources": ["contract/shadow-pass.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAkCA;;;;;;;;;;MAgBA,AAAA,iBAYC;;;;;cAZgC,iBAAwB;cAAE,kBAA0B;;;;;;;;;;;;;;;;;;;;;;;;;yCAApD,iBAAwB,+BAAE,kBAA0B;;;;;;;;;mDAApD,iBAAwB;mDAAE,kBAA0B;;;OAYpF;;;;;;;;GAvBA;EALD;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAVA;;;;;;;;;yEAAoC;IAGpC;;;;;;;;;yEAAyC;IAGzC;;;;;;;;;yEAAkC;UAM1B,uBAAoC;IAC1C;;;;;;;2HAAc,uBAAqB;;yEAAxB;IACX;;;;;;;;;yEAAU;;;;;;;GACX;EAWD,AAAA,oBAYC;;uBAZgC,iBAAwB;uBAAE,kBAA0B;;QAEtE,iBAAe;8BACnB,kBAAgB;;sDAAI;;;;;;;;;;;2HAAW;;;8BAE/B,kBAAgB;;sDAAG;;;;;;;;;;;2HAAW;;;IAKvC;;;;;;;2HAAsB,iBAAe;;yEAA3B;UACV,KAAiB;IAAjB;;;;;;;;;;6FAAA,KAAiB;;;;wEAAA;;GAClB;;;;;;;;;;;;;;;;IAtCD;qCAAA;;;;;;;;;;;0GAAoC;KAAA;IAGpC;qCAAA;;;;;;;;;;;0GAAyC;KAAA;IAGzC;qCAAA;;;;;;;;;;;0GAAkC;KAAA;;;;;;;;;;"
+}
