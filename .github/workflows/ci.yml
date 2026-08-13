@@ -25,7 +25,7 @@ jobs:
           compact-version: '0.31.1'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Compile contract
         run: npm run compile
