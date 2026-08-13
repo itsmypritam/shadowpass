@@ -48,6 +48,30 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const zkConfigPath = path.resolve(__dirname, '..', 'managed', 'shadow-pass');
 const contractPath = path.join(zkConfigPath, 'contract', 'index.js');
 
+// Built frontend (vite build src -> src/dist). Served by this same server so
+// the whole dApp (UI + API) is available on a single origin — this is what we
+// expose publicly via ngrok for the live demo.
+const distDir = path.resolve(__dirname, 'dist');
+
+const MIME: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.mjs': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.wasm': 'application/wasm',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.ico': 'image/x-icon',
+  '.map': 'application/json; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
+  '.prover': 'application/octet-stream',
+  '.verifier': 'application/octet-stream',
+  '.bzkir': 'application/octet-stream',
+  '.zkir': 'application/octet-stream',
+};
+
 if (!fs.existsSync(contractPath)) {
   console.error('❌ Contract not compiled. Run: npm run compile');
   process.exit(1);
@@ -69,6 +93,34 @@ const compiledContract = CompiledContract.make('shadow-pass', ShadowPass.Contrac
 // Narrow the deployment record once at module scope; closures below use the
 // already-narrowed value so TS keeps it non-null inside them.
 const contractAddress: string = deployment.address;
+
+/**
+ * Serve the built frontend from src/dist. Unknown paths fall back to
+ * index.html (SPA routing). Returns true when the request was handled.
+ */
+function serveStatic(res: any, pathname: string): boolean {
+  if (!fs.existsSync(distDir)) return false;
+
+  const safePath = pathname === '/' ? '/index.html' : pathname;
+  let filePath = path.normalize(path.join(distDir, safePath));
+  if (!filePath.startsWith(distDir)) return false; // path traversal guard
+
+  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+    filePath = path.join(distDir, 'index.html'); // SPA fallback
+  }
+  if (!fs.existsSync(filePath)) return false;
+
+  const ext = path.extname(filePath).toLowerCase();
+  const type = MIME[ext] ?? 'application/octet-stream';
+  const body = fs.readFileSync(filePath);
+  res.writeHead(200, {
+    'Content-Type': type,
+    'Content-Length': body.length,
+    'Access-Control-Allow-Origin': '*',
+  });
+  res.end(body);
+  return true;
+}
 
 function createProviders(walletCtx: WalletContext) {
   const privateStatePassword = process.env.PRIVATE_STATE_PASSWORD?.trim() || 'Local-Devnet-Development-Placeholder-1';
@@ -209,6 +261,11 @@ async function main() {
         const msg = e?.message ?? String(e);
         return send(res, 500, { error: msg });
       }
+    }
+
+    // Serve the built frontend for any non-API GET request.
+    if (req.method === 'GET' && serveStatic(res, route)) {
+      return;
     }
 
     return send(res, 404, { error: `Not found: ${route}` });

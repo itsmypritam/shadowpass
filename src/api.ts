@@ -17,8 +17,13 @@ export interface VerifyResponse {
   lastResult: boolean;
 }
 
+// When the API is exposed through a free ngrok tunnel, the interstitial
+// warning page intercepts requests unless this header is present. It is
+// harmless for any other backend.
+const API_HEADERS: Record<string, string> = { 'ngrok-skip-browser-warning': 'true' };
+
 export async function getContractInfo(): Promise<ContractInfo> {
-  const res = await fetch('/api/contract');
+  const res = await fetch('/api/contract', { headers: API_HEADERS });
   if (!res.ok) throw new Error(`Failed to load contract state: ${await res.text()}`);
   return res.json();
 }
@@ -28,7 +33,7 @@ export async function submitVerification(
 ): Promise<VerifyResponse> {
   const res = await fetch('/api/verify', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
   });
   const body = await res.json();
