@@ -66,3 +66,6 @@ temp/
 
 # Local LevelDB private-state cache (server-side level provider)
 midnight-level-db/
+
+# Lockfile is git-ignored: native optional deps (rollup/esbuild/smoldot)
+# differ per platform (Windows dev vs Linux CI) and break npm ci.
