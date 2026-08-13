@@ -53,10 +53,10 @@
     "@vitejs/plugin-react": "^4.3.4",
     "tsx": "^4.23.1",
     "typescript": "^6.0.3",
-    "vite": "^8.2.1",
+    "vite": "^5.4.11",
     "vite-plugin-top-level-await": "^1.4.1",
     "vite-plugin-wasm": "^3.3.0",
-    "vitest": "^4.1.10"
+    "vitest": "^2.1.9"
   },
   "engines": {
     "node": ">=22.0.0"
