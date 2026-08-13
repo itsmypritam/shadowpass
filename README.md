@@ -23,18 +23,19 @@ threshold without revealing the underlying value."
   <a href="https://repaint-stingily-nutlike.ngrok-free.dev"><strong>repaint-stingily-nutlike.ngrok-free.dev</strong></a>
 </p>
 
-The interactive demo runs against a **deployed Midnight devnet contract** through
-a public tunnel, with all proving done server-side by the Node wallet:
+The interactive demo runs against a **permanently deployed contract on the
+Midnight Preview testnet**, exposed through a public tunnel, with all proving
+done server-side by the funded Node wallet:
 
 1. Open the link (ngrok free tier shows a one-time "Visit Site" interstitial —
    click through).
 2. Pick the result you want recorded and enter your **private** score.
 3. The server-side wallet proves `score >= requirement` in a zero-knowledge
    circuit — only the boolean is published to the ledger.
-4. On-chain state updates instantly; you can watch `verificationCount` climb.
+4. On-chain state updates instantly; you can watch `verificationCount` climb and
+   verify the transaction on the public explorer.
 
-A permanent copy of the contract is also deployed on the **Midnight Preview**
-testnet at:
+The live contract on **Midnight Preview**:
 `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69`
 (verify with the [Midnight block explorer](https://explorer.midnight.network) —
 `Preview` network).
