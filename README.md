@@ -12,7 +12,7 @@ Chosen problem from the challenge list: **Age / Eligibility Gate** — "prove a
 threshold without revealing the underlying value."
 
 [![CI](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml/badge.svg)](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml)
-[![Live demo](https://img.shields.io/badge/demo-live-0fbcb0?logo=vercel)](https://shadowpass.vercel.app)
+[![Live demo](https://img.shields.io/badge/demo-live-0fbcb0?logo=vercel)](https://shadowpass-wheat.vercel.app)
 [![License](https://img.shields.io/badge/license-MIT-050038)](LICENSE)
 
 ---
@@ -20,7 +20,7 @@ threshold without revealing the underlying value."
 ## Live demo
 
 <p align="center">
-  <a href="https://shadowpass.vercel.app"><strong>shadowpass.vercel.app</strong></a>
+  <a href="https://shadowpass-wheat.vercel.app"><strong>shadowpass-wheat.vercel.app</strong></a>
 </p>
 
 The hosted demo runs against the **Midnight Preprod** testnet with a deployed,
