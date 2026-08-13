@@ -1,0 +1,16 @@
+tests/shadow-pass-simulator.ts
+  h_7aa35c57e7bf7b 1-58
+tests/shadow-pass.test.ts
+  h_7aa35c57e7bf7b 1-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "74bf51d6a20e52b60092b4b0ca907ab9912b5e27",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
