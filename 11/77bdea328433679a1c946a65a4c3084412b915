@@ -1,0 +1,30 @@
+scripts/check-balance.ts
+  h_7aa35c57e7bf7b 1-87
+scripts/cli.ts
+  h_7aa35c57e7bf7b 1-250
+scripts/deploy.ts
+  h_7aa35c57e7bf7b 1-376
+scripts/dev.ts
+  h_7aa35c57e7bf7b 1-20
+scripts/e2e-check.ts
+  h_7aa35c57e7bf7b 1-135
+scripts/network.ts
+  h_7aa35c57e7bf7b 1-431
+scripts/setup.ts
+  h_7aa35c57e7bf7b 1-37
+scripts/wallet-state.ts
+  h_7aa35c57e7bf7b 1-95
+scripts/wallet.ts
+  h_7aa35c57e7bf7b 1-195
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "1177bdea328433679a1c946a65a4c3084412b915",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
