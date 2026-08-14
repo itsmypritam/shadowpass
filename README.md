@@ -31,6 +31,9 @@ threshold without revealing the underlying value."
   > compact compile contract/shadow-pass.compact managed/shadow-pass
 
   Compiling 1 circuits: verifyEligibility
+  managed/shadow-pass/zkir/verifyEligibility.zkir
+  managed/shadow-pass/keys/verifyEligibility.prover
+  managed/shadow-pass/keys/verifyEligibility.verifier
   ```
 
   Step log: any green **CI → "Compile contract"** run in
