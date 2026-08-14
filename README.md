@@ -4,6 +4,8 @@
 <img width="1822" height="852" alt="fr22" src="https://github.com/user-attachments/assets/76dc416a-9275-4c94-aa9b-3e871de865bc" />
 <img width="1898" height="818" alt="fr11" src="https://github.com/user-attachments/assets/7b463259-10cb-400b-8aba-9a8d673e83f4" />
 
+<img width="1865" height="795" alt="contract midnight1" src="https://github.com/user-attachments/assets/eb9b672f-7a62-4f24-81d6-11d89b59e9e2" />
+
 > **Age / Eligibility Gate** — prove a threshold without revealing the underlying value.
 
 ShadowPass is a privacy-first eligibility verifier on **Midnight**. It proves
@@ -104,6 +106,7 @@ Verify on the [Midnight block explorer](https://preview.midnightexplorer.com/con
 ---
 
 ## Privacy model
+
 
 What an **observer** can and cannot learn from ShadowPass:
 
