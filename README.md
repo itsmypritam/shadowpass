@@ -232,6 +232,7 @@ testkit — no blockchain or proof server required:
 
 ## CI/CD
 
+
 `.github/workflows/ci.yml` runs on every push and pull request:
 
 1. installs the pinned **compact compiler** (`midnightntwrk/setup-compact-action`)
@@ -239,7 +240,7 @@ testkit — no blockchain or proof server required:
 3. uploads the built frontend as a workflow artifact
 
 ## Deployment
-
+<img width="1892" height="853" alt="cid" src="https://github.com/user-attachments/assets/a05b7432-b541-4760-ab53-8e0754243357" />
 - **Frontend**: `vercel.json` builds `src/` with Vite. Set the `VITE_*` vars
   below in the Vercel project and deploy — the build is fully static.
 
