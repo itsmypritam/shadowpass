@@ -1,0 +1,19 @@
+src/main.tsx
+  s_e4856d7dee91ae::t_fa43597046f317 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a630ee4317b89582489b484ab76f34f22991d814",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
