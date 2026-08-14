@@ -1,0 +1,19 @@
+src/vite.config.ts
+  s_e4856d7dee91ae::t_0949fb3ff0eb67 18-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9af69c1d09cb409ffe710dd1a26a4bc5f324e4c4",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
