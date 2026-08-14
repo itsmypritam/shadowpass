@@ -15,6 +15,10 @@ export default defineConfig({
       // isomorphic-ws only default-exports in the browser; the indexer
       // provider does a named import. Satisfy it with the native global.
       'isomorphic-ws': `${__dirname.replace(/\\/g, '/')}/vendor/isomorphic-ws.ts`,
+      // cross-fetch re-exports the native window.fetch unbound, which throws
+      // "Illegal invocation" when the midnight-js providers call it with a
+      // different receiver. Replace it with a window-bound fetch.
+      'cross-fetch': `${__dirname.replace(/\\/g, '/')}/vendor/cross-fetch.ts`,
     },
   },
   build: {
