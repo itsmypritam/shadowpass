@@ -1,5 +1,9 @@
 # ShadowPass
 
+
+<img width="1822" height="852" alt="fr22" src="https://github.com/user-attachments/assets/76dc416a-9275-4c94-aa9b-3e871de865bc" />
+<img width="1898" height="818" alt="fr11" src="https://github.com/user-attachments/assets/7b463259-10cb-400b-8aba-9a8d673e83f4" />
+
 > **Age / Eligibility Gate** — prove a threshold without revealing the underlying value.
 
 ShadowPass is a privacy-first eligibility verifier on **Midnight**. It proves
@@ -16,8 +20,12 @@ threshold without revealing the underlying value."
 [![License](https://img.shields.io/badge/license-MIT-050038)](LICENSE)
 
 ---
-
 ## Live demo
+
+https://github.com/user-attachments/assets/3008f9f1-8390-4ccc-8379-6909922d69c2
+
+
+
 
 <p align="center">
   <a href="https://repaint-stingily-nutlike.ngrok-free.dev"><strong>repaint-stingily-nutlike.ngrok-free.dev</strong></a>
