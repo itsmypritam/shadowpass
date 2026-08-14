@@ -20,6 +20,40 @@ threshold without revealing the underlying value."
 [![License](https://img.shields.io/badge/license-MIT-050038)](LICENSE)
 
 ---
+## Submission checklist
+
+- **Public GitHub repository with a README.md** — [github.com/itsmypritam/shadowpass](https://github.com/itsmypritam/shadowpass)
+- **Setup instructions (how to run locally)** — see [Quick start](#quick-start-local-devnet) below.
+- **Screenshot: successful compile output (circuits listed)** — the Midnight compact
+  compiler (pinned in CI) reports the compiled circuit:
+
+  ```text
+  > compact compile contract/shadow-pass.compact managed/shadow-pass
+
+  Compiling 1 circuits: verifyEligibility
+  ```
+
+  Step log: any green **CI → "Compile contract"** run in
+  [Actions](https://github.com/itsmypritam/shadowpass/actions). Locally on
+  Windows the compiler runs inside CI; the compiled artifacts in `managed/` are
+  committed so the repo builds without the Linux compiler.
+- **Screenshot: contract deployed with address shown** — deployed live on
+  Midnight **Preview**:
+
+  | Network | Contract address |
+  | --- | --- |
+  | Preview | `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69` |
+
+  Verify on the [Midnight block explorer](https://explorer.midnight.network)
+  (`Preview` network) or with the demo at `/api/contract`.
+- **README section explaining public state vs private witness** — see [Privacy
+  model](#privacy-model) below.
+- **Initial product idea paragraph** — see the intro above and
+  [`PROPOSAL.md`](PROPOSAL.md).
+- **Minimum 5 meaningful commits** — see the
+  [commit history](https://github.com/itsmypritam/shadowpass/commits/main).
+
+---
 ## Live demo
 
 https://github.com/user-attachments/assets/3008f9f1-8390-4ccc-8379-6909922d69c2
@@ -59,10 +93,11 @@ To run the interactive demo yourself: start Docker, run `npm run setup`, then
 
 | Network | Contract address |
 | --- | --- |
-| Preprod | `PLACEHOLDER_PREPROD_ADDRESS` |
+| Preview | `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69` |
 
-Verify on [explorer.devnet.midnight.network](https://explorer.devnet.midnight.network) —
-the ledger shows only `requirement`, `verificationCount`, and `lastResult`.
+Verify on the [Midnight block explorer](https://explorer.midnight.network)
+(`Preview` network) — the ledger shows only `requirement`,
+`verificationCount`, and `lastResult`.
 
 ---
 
@@ -101,7 +136,7 @@ The contract source of truth is [`contract/shadow-pass.compact`](contract/shadow
                     │  · Lace signs + submits     │
                     └──────┬──────────┬───────────┘
                            │          │
-   static (Vercel demo)    │          └─ DApp Connector API (Lace, preprod)
+   static (Vercel demo)    │          └─ DApp Connector API (Lace, preview)
    ┌───────────────────────┘
    │
    ▼
@@ -110,7 +145,7 @@ The contract source of truth is [`contract/shadow-pass.compact`](contract/shadow
 │  · Node wallet (server-side │     │  · node / indexer / proof    │
 │    verify fallback)         │     │  · compiled contract on-ledger│
 └──────────────┬──────────────┘     └──────────────────────────────┘
-               │ local devnet / preprod indexers & proof servers
+               │ local devnet / preview indexers & proof servers
 ```
 
 - **`contract/shadow-pass.compact`** — the Midnight circuit. Public ledger:
@@ -157,17 +192,21 @@ npm run dev:ui       # Vite dev server on http://localhost:5173 (proxies /api)
 
 ---
 
-## Deploy to Preprod
+## Deploy to a public network (Preview / Preprod)
 
 ```bash
-npm run network preprod
-npm run setup -- --network preprod
+npm run network preview
+npm run setup -- --network preview
 ```
 
 `setup` generates a fresh BIP-39 wallet (24-word phrase, printed once — back it
 up; it restores the same wallet in Lace), prints your address, and polls the
-faucet. Fund the address from the [Midnight Preprod faucet](https://faucet.testnet.midnight.network/).
+faucet. Fund the address from the
+[Midnight Preview faucet](https://midnight-tmnight-preview.nethermind.dev).
 The deploy address is recorded in `.midnight-state.json` (gitignored).
+
+For **Preprod**, use `npm run network preprod` and the
+[Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev) instead.
 
 Switch back to the local devnet any time with `npm run network undeployed`.
 
@@ -203,10 +242,10 @@ testkit — no blockchain or proof server required:
 
 | Variable | Purpose |
 | --- | --- |
-| `VITE_CONTRACT_ADDRESS` | Preprod contract address |
-| `VITE_NETWORK_ID` | `preprod` |
-| `VITE_INDEXER_URI` | `https://indexer.preprod.midnight.network/api/v4/graphql` |
-| `VITE_INDEXER_WS_URI` | `wss://indexer.preprod.midnight.network/api/v4/graphql/ws` |
+| `VITE_CONTRACT_ADDRESS` | `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69` (Preview) |
+| `VITE_NETWORK_ID` | `preview` |
+| `VITE_INDEXER_URI` | `https://indexer.preview.midnight.network/api/v4/graphql` |
+| `VITE_INDEXER_WS_URI` | `wss://indexer.preview.midnight.network/api/v4/graphql/ws` |
 
 Without `VITE_CONTRACT_ADDRESS` the app runs in dev mode against `/api` (local
 server). With it, the app runs in **static mode**: contract state is read
