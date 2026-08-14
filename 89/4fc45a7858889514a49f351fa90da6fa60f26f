@@ -1,0 +1,20 @@
+README.md
+  s_e4856d7dee91ae::t_1be035a7bf0844 84
+  s_e4856d7dee91ae::t_118c4116efb1f5 100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "894fc45a7858889514a49f351fa90da6fa60f26f",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
