@@ -81,7 +81,7 @@ done server-side by the funded Node wallet:
 
 The live contract on **Midnight Preview**:
 `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69`
-(verify with the [Midnight block explorer](https://explorer.midnight.network) —
+(verify with the [Midnight block explorer](https://preview.midnightexplorer.com/contracts/e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69) —
 `Preview` network).
 
 A hosted, backend-less build of the frontend (reads state from the public
@@ -97,7 +97,7 @@ To run the interactive demo yourself: start Docker, run `npm run setup`, then
 | --- | --- |
 | Preview | `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69` |
 
-Verify on the [Midnight block explorer](https://explorer.midnight.network)
+Verify on the [Midnight block explorer](https://preview.midnightexplorer.com/contracts/e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69)
 (`Preview` network) — the ledger shows only `requirement`,
 `verificationCount`, and `lastResult`.
 
