@@ -22,38 +22,37 @@ threshold without revealing the underlying value."
 ---
 ## Submission checklist
 
-- **Public GitHub repository with a README.md** — [github.com/itsmypritam/shadowpass](https://github.com/itsmypritam/shadowpass)
-- **Setup instructions (how to run locally)** — see [Quick start](#quick-start-local-devnet) below.
-- **Screenshot: successful compile output (circuits listed)** — the Midnight compact
-  compiler (pinned in CI) reports the compiled circuit:
+- **Public GitHub repository with a complete README** — [github.com/itsmypritam/shadowpass](https://github.com/itsmypritam/shadowpass)
+- **Live demo link** — [shadowpass-wheat.vercel.app](https://shadowpass-wheat.vercel.app)
+  (Vercel, static build against the Preview indexer).
+- **Screenshot: test output (3+ tests passing)** — `npm test` runs 9 Vitest
+  cases; all pass:
 
   ```text
-  > compact compile contract/shadow-pass.compact managed/shadow-pass
+  ✓ tests/shadow-pass.test.ts (9 tests) 182ms
 
-  Compiling 1 circuits: verifyEligibility
-  managed/shadow-pass/zkir/verifyEligibility.zkir
-  managed/shadow-pass/keys/verifyEligibility.prover
-  managed/shadow-pass/keys/verifyEligibility.verifier
+   Test Files  1 passed (1)
+        Tests  9 passed (9)
   ```
 
-  Step log: any green **CI → "Compile contract"** run in
-  [Actions](https://github.com/itsmypritam/shadowpass/actions). Locally on
-  Windows the compiler runs inside CI; the compiled artifacts in `managed/` are
-  committed so the repo builds without the Linux compiler.
-- **Screenshot: contract deployed with address shown** — deployed live on
-  Midnight **Preview**:
+  Also visible in any green **CI → "Typecheck, tests & build"** run in
+  [Actions](https://github.com/itsmypritam/shadowpass/actions).
+- **CI/CD badge or workflow file with passing runs** —
 
-  | Network | Contract address |
-  | --- | --- |
-  | Preview | `e5a0ea30513a2e1da27ff18a47865a0d7e63ccd73771320170c6e1befda51f69` |
+  [![CI](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml/badge.svg)](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml)
 
-  Verify on the [Midnight block explorer](https://explorer.midnight.network)
-  (`Preview` network) or with the demo at `/api/contract`.
-- **README section explaining public state vs private witness** — see [Privacy
-  model](#privacy-model) below.
-- **Initial product idea paragraph** — see the intro above and
-  [`PROPOSAL.md`](PROPOSAL.md).
-- **Minimum 5 meaningful commits** — see the
+  `.github/workflows/ci.yml` pins the compact compiler, runs `npm ci` →
+  `npm run compile` → typecheck → `npm test` → `vite build` on every push.
+- **Demo video (1 minute) showing full functionality** — *(link the recorded
+  video here)*. Walkthrough: generate an eligibility proof for a high score
+  (server-wallet verify, proof server, on-chain result on Preview), then a
+  rejected false claim, and the browser static-mode entry via the indexer.
+- **README "privacy model" section: what an observer can and cannot learn** —
+  see [Privacy model](#privacy-model) below.
+- **Product proposal (from the idea list) submitted for approval** — the
+  Age / Eligibility Gate idea, in [`PROPOSAL.md`](PROPOSAL.md) and the intro
+  above.
+- **Minimum 10 meaningful commits** — see the
   [commit history](https://github.com/itsmypritam/shadowpass/commits/main).
 
 ---
