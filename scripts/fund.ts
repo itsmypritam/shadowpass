@@ -15,7 +15,7 @@ import { MidnightBech32m, UnshieldedAddress } from '@midnight-ntwrk/wallet-sdk';
 import { resolveNetwork, getOrCreateWallet } from './network';
 import { createWallet, persistWalletState } from './wallet';
 
-globalThis.WebSocket = WebSocket;
+globalThis.WebSocket = WebSocket as unknown as typeof globalThis.WebSocket;
 
 const { network, config: networkConfig } = resolveNetwork();
 const to = process.argv[2];
