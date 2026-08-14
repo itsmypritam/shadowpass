@@ -1,0 +1,24 @@
+README.md
+  s_e4856d7dee91ae::t_f954af9cbcedc3 96,98-100
+  s_e4856d7dee91ae::t_7b62ba2e5f6b82 139
+  s_e4856d7dee91ae::t_312faf602e1b1a 195,198-199,204-205,208-209
+  s_e4856d7dee91ae::t_df96127e409d24 245-248
+  s_e4856d7dee91ae::t_b69ef11a87d5cc 22-55,210
+  s_e4856d7dee91ae::t_9c89b161423aa9 148
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c528c862fe93aa7150fc5c4bc159c459e102f04d",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
