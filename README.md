@@ -4,6 +4,8 @@
 
 ### Privacy-first eligibility verification on **Midnight**
 
+<img width="1843" height="906" alt="1111" src="https://github.com/user-attachments/assets/ade5bc9d-89be-47df-bb43-c121f7d8a1c5" />
+<img width="1710" height="602" alt="22222" src="https://github.com/user-attachments/assets/afb89164-baa5-410d-b99c-e0ffee08d7ba" />
 **Prove `score ≥ requirement` in zero knowledge — publish only the boolean.**
 
 <img width="1865" height="795" alt="contract midnight1" src="https://github.com/user-attachments/assets/eb9b672f-7a62-4f24-81d6-11d89b59e9e2" />
