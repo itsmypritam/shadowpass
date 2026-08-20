@@ -1,0 +1,33 @@
+src/styles.css
+  s_7c71f4c81f78f6::t_481dd9e8a71e6e 1342-1428
+src/server.ts
+  s_7c71f4c81f78f6::t_4f6bc5b5c3dad2 266-322
+preprod-users.json
+  s_7c71f4c81f78f6::t_a8a666b251156f 1-6
+README.md
+  s_7c71f4c81f78f6::t_9bebe33fef4f8c 3,9,13-18,21,23,35,44,46-47,55-56,63,66,75-82,92,94,96,103-104,108,122,124-131,141,146-190,194-210,213,216,218,220,222,230,232,250,254,260,280,300,304,323-324,336,340-343,354-369,374-396,406-434,437,439-452,458
+src/App.tsx
+  s_7c71f4c81f78f6::t_a940a997c2dd57 436
+  s_7c71f4c81f78f6::t_af552e784f05d0 901-1000
+  s_7c71f4c81f78f6::t_3fa5cea9c9826f 2
+src/api.ts
+  s_7c71f4c81f78f6::t_4ba173dec52872 45-83
+package.json
+  s_7c71f4c81f78f6::t_ead0676e793484 65-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b1fff9f61af8489db835c2f3bfe1df96ed49f2cd",
+  "prompts": {},
+  "sessions": {
+    "s_7c71f4c81f78f6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fe0bcc75effepFEdNfHGFoq6ny",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
