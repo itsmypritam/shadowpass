@@ -263,6 +263,63 @@ async function main() {
       }
     }
 
+    if (req.method === 'POST' && route === '/api/feedback') {
+      try {
+        const body = await readBody(req);
+        const walletAddress = body.walletAddress ?? 'anonymous';
+        const rating = Number(body.rating);
+        const comment = String(body.comment ?? '').trim();
+        const useCase = String(body.useCase ?? '').trim();
+        if (!rating || rating < 1 || rating > 5) {
+          return send(res, 400, { error: 'rating must be 1-5' });
+        }
+        const entry = {
+          walletAddress,
+          rating,
+          comment,
+          useCase,
+          submittedAt: new Date().toISOString(),
+        };
+        const feedbackPath = path.join(__dirname, '..', '..', 'preprod-users.json');
+        let data: any = { users: [], feedback: [] };
+        if (fs.existsSync(feedbackPath)) {
+          data = JSON.parse(fs.readFileSync(feedbackPath, 'utf-8'));
+        }
+        data.feedback.push(entry);
+        if (walletAddress !== 'anonymous' && !data.users.includes(walletAddress)) {
+          data.users.push(walletAddress);
+        }
+        fs.writeFileSync(feedbackPath, JSON.stringify(data, null, 2) + '\n');
+        console.log(`  feedback: wallet=${walletAddress} rating=${rating}`);
+        return send(res, 200, { ok: true, userCount: data.users.length, feedbackCount: data.feedback.length });
+      } catch (e: any) {
+        return send(res, 500, { error: e.message ?? String(e) });
+      }
+    }
+
+    if (req.method === 'POST' && route === '/api/track-user') {
+      try {
+        const body = await readBody(req);
+        const walletAddress = body.walletAddress;
+        if (!walletAddress || typeof walletAddress !== 'string') {
+          return send(res, 400, { error: 'walletAddress is required' });
+        }
+        const feedbackPath = path.join(__dirname, '..', '..', 'preprod-users.json');
+        let data: any = { users: [], feedback: [] };
+        if (fs.existsSync(feedbackPath)) {
+          data = JSON.parse(fs.readFileSync(feedbackPath, 'utf-8'));
+        }
+        if (!data.users.includes(walletAddress)) {
+          data.users.push(walletAddress);
+          fs.writeFileSync(feedbackPath, JSON.stringify(data, null, 2) + '\n');
+          console.log(`  track-user: new wallet ${walletAddress} (total: ${data.users.length})`);
+        }
+        return send(res, 200, { ok: true, userCount: data.users.length });
+      } catch (e: any) {
+        return send(res, 500, { error: e.message ?? String(e) });
+      }
+    }
+
     // Serve the built frontend for any non-API GET request.
     if (req.method === 'GET' && serveStatic(res, route)) {
       return;

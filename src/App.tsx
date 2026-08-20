@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getContractInfo, submitVerification, type ContractInfo } from './api';
+import { getContractInfo, submitVerification, submitFeedback, type ContractInfo } from './api';
 import {
   connectMidnightWallet,
   getWalletBalances,
@@ -433,6 +433,7 @@ export default function App() {
       </section>
 
       <CtaBanner />
+      <FeedbackSection walletAddress={walletBalances?.unshieldedAddress} />
       <Footer address={contract?.address} />
     </div>
   );
@@ -894,6 +895,106 @@ function CtaBanner() {
         </a>
       </div>
     </div>
+  );
+}
+
+function FeedbackSection({ walletAddress }: { walletAddress?: string }) {
+  const [rating, setRating] = useState<number>(0);
+  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [comment, setComment] = useState('');
+  const [useCase, setUseCase] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit = async () => {
+    if (!rating) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitFeedback({ walletAddress, rating, comment, useCase });
+      setSubmitted(true);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="section" id="feedback">
+      <div className="container">
+        <p className="section-eyebrow">
+          <span className="badge badge-tag-yellow">FEEDBACK</span>
+        </p>
+        <h2>Help us improve ShadowPass</h2>
+        <p className="section-sub">
+          Your feedback shapes the product. Rate your experience and tell us
+          how you use ShadowPass — every response helps us build better privacy tools.
+        </p>
+
+        {submitted ? (
+          <div className="feedback-thanks">
+            <span className="badge badge-success">THANK YOU</span>
+            <h3>Your feedback has been recorded</h3>
+            <p>
+              Thank you for helping us improve ShadowPass. Your input directly
+              influences what we build next.
+            </p>
+          </div>
+        ) : (
+          <div className="feedback-form">
+            <div className="feedback-rating">
+              <span>Rate your experience:</span>
+              <div className="stars">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    className={`star ${(hoverRating || rating) >= n ? 'active' : ''}`}
+                    onClick={() => setRating(n)}
+                    onMouseEnter={() => setHoverRating(n)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    aria-label={`${n} star${n > 1 ? 's' : ''}`}
+                  >
+                    {(hoverRating || rating) >= n ? '\u2605' : '\u2606'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <label className="field">
+              <span>How are you using ShadowPass? (optional)</span>
+              <input
+                type="text"
+                value={useCase}
+                onChange={(e) => setUseCase(e.target.value)}
+                placeholder="e.g. age verification, credential check, eligibility gate"
+              />
+            </label>
+
+            <label className="field">
+              <span>Your feedback (optional)</span>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="What did you like? What could be better?"
+                rows={4}
+              />
+            </label>
+
+            {error && <div className="verify-result err">{error}</div>}
+
+            <button
+              className="btn btn-primary"
+              onClick={() => void onSubmit()}
+              disabled={submitting || !rating}
+            >
+              {submitting ? 'Submitting...' : 'Submit feedback'}
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

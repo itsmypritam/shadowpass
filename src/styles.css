@@ -1339,3 +1339,90 @@ code {
     flex-direction: column;
   }
 }
+
+/* ============================================================
+   Feedback form
+   ============================================================ */
+.feedback-form {
+  max-width: 560px;
+  margin: var(--sec) auto 0;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-xxxl);
+  padding: var(--sp-xxl);
+  box-shadow: var(--shadow-2);
+  display: grid;
+  gap: var(--sp-lg);
+}
+
+.feedback-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  font-size: 15px;
+  color: var(--slate);
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0 2px;
+  transition: color 150ms ease, transform 150ms ease;
+  line-height: 1;
+}
+
+.star.active {
+  color: var(--brand-yellow);
+}
+
+.star:hover {
+  transform: scale(1.15);
+}
+
+.field textarea {
+  width: 100%;
+  padding: var(--sp-sm) var(--sp-md);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-md);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.field textarea:focus {
+  outline: none;
+  border: 2px solid var(--brand-blue);
+}
+
+.feedback-thanks {
+  max-width: 560px;
+  margin: var(--sec) auto 0;
+  text-align: center;
+  background: var(--teal-light);
+  border-radius: var(--r-xxxl);
+  padding: var(--sp-xxl);
+  display: grid;
+  gap: var(--sp-md);
+}
+
+.feedback-thanks h3 {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.feedback-thanks p {
+  font-size: 15px;
+  color: var(--moss-dark);
+  line-height: 1.5;
+}

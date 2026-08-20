@@ -42,3 +42,42 @@ export async function submitVerification(
   }
   return body;
 }
+
+export interface FeedbackRequest {
+  walletAddress?: string;
+  rating: number;
+  comment?: string;
+  useCase?: string;
+}
+
+export interface FeedbackResponse {
+  ok: boolean;
+  userCount: number;
+  feedbackCount: number;
+}
+
+export async function submitFeedback(request: FeedbackRequest): Promise<FeedbackResponse> {
+  const res = await fetch('/api/feedback', {
+    method: 'POST',
+    headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    throw new Error(body?.error ?? `Feedback failed with status ${res.status}`);
+  }
+  return body;
+}
+
+export async function trackUser(walletAddress: string): Promise<{ ok: boolean; userCount: number }> {
+  const res = await fetch('/api/track-user', {
+    method: 'POST',
+    headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ walletAddress }),
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    throw new Error(body?.error ?? `Track failed with status ${res.status}`);
+  }
+  return body;
+}
