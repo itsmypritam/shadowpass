@@ -370,7 +370,13 @@ straight from the indexer and verification happens entirely in the browser.
 ```
 
 ---
+--------
 
+##Twitter /X 
+link - > https://x.com/Shadowpassmid
+
+tweet -> https://x.com/Shadowpassmid/status/2090427851397058971?s=20
+-----------
 ## Feedback
 
 We collect structured user feedback to improve ShadowPass. After trying the
