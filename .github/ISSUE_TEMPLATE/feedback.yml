@@ -1,0 +1,34 @@
+---
+name: "\xF0\x9F\x93\xA3 User feedback"
+about: Share structured feedback about your ShadowPass experience (rating, use case, comment)
+title: "Feedback: [short summary]"
+labels: ["feedback"]
+assignees: []
+---
+
+<!-- This template feeds the ShadowPass feedback loop (docs/FEEDBACK.md).
+     Fill in what you can — even a rating alone helps. -->
+
+## Feedback
+
+**Wallet address** (Preprod, optional): `mn1...`
+
+**Rating** (1-5):
+
+**Use case** (how are you using ShadowPass?):
+- [ ] Age / eligibility gate
+- [ ] Credential check
+- [ ] Financial threshold
+- [ ] Curiosity / demo
+- [ ] Other: ___
+
+**What did you like?**
+
+**What could be better?**
+
+**Anything broken?** (include the error message and whether you used the
+Lace browser wallet or the server path)
+
+<!-- Optional debug info -->
+**Network:** Preprod
+**Verify path:** (browser Lace / server wallet)
