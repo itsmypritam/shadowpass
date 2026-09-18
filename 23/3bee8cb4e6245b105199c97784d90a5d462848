@@ -1,0 +1,24 @@
+README.md
+  s_7965b2df3e5e68::t_41df0be6dbd1e1 361
+  s_7965b2df3e5e68::t_709248323d8ab5 345-346,348-349
+  s_7965b2df3e5e68::t_2112b1e76cb340 397-398,400-414
+  s_7965b2df3e5e68::t_514b64d9d2bae6 366,427-439
+  s_7965b2df3e5e68::t_5e661270baf7a2 364-365
+  s_7965b2df3e5e68::t_db5ab3fd871579 367
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "233bee8cb4e6245b105199c97784d90a5d462848",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
