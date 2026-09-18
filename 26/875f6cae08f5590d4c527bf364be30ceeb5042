@@ -1,0 +1,29 @@
+src/App.tsx
+  s_7965b2df3e5e68::t_059c2aa6cdc0a1 1217
+  s_7965b2df3e5e68::t_2665c9fac0cdd0 987
+  s_7965b2df3e5e68::t_067eb5cfc20c1c 1097
+  s_7965b2df3e5e68::t_3d3f3b0a089fd6 1170-1176,1182-1186
+  s_7965b2df3e5e68::t_28d4d731da8872 640-642
+  s_7965b2df3e5e68::t_f37e8fb41865a5 1039-1041
+  s_7965b2df3e5e68::t_757da79b74d586 948-959,961-986,988-1028,1030-1038,1042-1061
+  s_7965b2df3e5e68::t_74ee84f6c94bd1 1079-1082,1084-1096,1098-1099
+  s_7965b2df3e5e68::t_55e4df9a3d4a33 1083
+  s_7965b2df3e5e68::t_728735303f81a4 960,1029
+  s_7965b2df3e5e68::t_b11b797065a35b 1062-1064
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "26875f6cae08f5590d4c527bf364be30ceeb5042",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
