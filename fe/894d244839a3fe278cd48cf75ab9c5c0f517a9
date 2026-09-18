@@ -1,0 +1,25 @@
+tests/batch-verify.test.ts
+  s_7965b2df3e5e68::t_7d0d3d0ddd4562 1-36
+scripts/batch-verify.ts
+  s_7965b2df3e5e68::t_b90469894466b8 1-48,52-96,114-165,167-218,220,222-236,238-262
+  s_7965b2df3e5e68::t_90a9205a4b8f9b 101-102
+  s_7965b2df3e5e68::t_40cb33e4d01704 49-51,97-100,112-113,219,221,237
+  s_7965b2df3e5e68::t_2f92c9107c2a78 103-111
+  s_7965b2df3e5e68::t_f345f23477ac22 166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fe894d244839a3fe278cd48cf75ab9c5c0f517a9",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
