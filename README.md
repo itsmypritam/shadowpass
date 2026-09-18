@@ -444,14 +444,38 @@ curl -X POST http://localhost:3000/api/feedback \
   -d '{"walletAddress":"mn1q...","rating":5,"useCase":"age verification","comment":"Works great!"}'
 ```
 
-Feedback fields:
-- **rating** (1-5): Overall experience
-- **useCase**: How you are using ShadowPass
-- **comment**: Open-ended feedback
-- **walletAddress**: Your Preprod wallet address (for user tracking)
+Feedback fields: **rating** (1-5), **useCase**, **comment**, **walletAddress**
+(your Preprod wallet, for on-chain verification). All feedback lives in
+`preprod-users.json`, is covered by CI validation, and is reviewed each
+iteration.
 
-All feedback is stored in [`preprod-users.json`](preprod-users.json) and
-reviewed for each product iteration.
+Live metrics are public when the API-backed server is running:
+`GET /api/users` and `GET /api/analytics`.
+
+---
+
+## User registry CLI
+
+Manage the Preprod user registry and feedback from the terminal (also drives
+CI validation):
+
+```bash
+npm run registry -- status                  # summary + progress to 70 users
+npm run registry -- add mn1q...             # register a wallet address
+npm run registry -- verify mn1q...          # mark one on-chain verification
+npm run registry -- feedback add --rating 5 --use-case age --comment "..." --wallet mn1q...
+npm run registry -- feedback list
+npm run registry -- export --out docs/preprod-users.md
+npm run registry -- validate                # CI gate, exit 1 on issues
+```
+
+**On-chain sync** extracts REAL wallet addresses straight from the Midnight
+indexer (never fabricated) — see [`docs/OPERATIONS.md`](docs/OPERATIONS.md):
+
+```bash
+npm run sync-users -- --network preprod --contract <hex>   # dry-run report
+npm run sync-users -- --network preprod --contract <hex> --apply  # merge found
+```
 
 ---
 
@@ -466,18 +490,26 @@ proposal: problem, solution, privacy design, and roadmap. A follow-up
 
 ## Preprod users
 
-ShadowPass is live on **Preprod**. Users who have connected their wallets and
-submitted verifications are tracked in
-[`preprod-users.json`](preprod-users.json).
+ShadowPass is live on **Preprod**, and every user wallet is tracked in a
+public, committed registry: [`preprod-users.json`](preprod-users.json). Each
+address is verified **on-chain** against the Midnight Preprod ledger before it
+is marked `verified`.
 
 To register as a Preprod user:
-1. Connect your Lace wallet to the Preprod network
-2. Visit [shadowpass-wheat.vercel.app](https://shadowpass-wheat.vercel.app)
-3. Complete a zero-knowledge verification
-4. Submit feedback via the in-app form
 
-The wallet address is recorded on-chain via the verification transaction and
-verifiable on the [Midnight block explorer](https://preview.midnightexplorer.com).
+1. Connect your Lace wallet to the **Preprod** network
+2. Complete a zero-knowledge verification at
+   [shadowpass-wheat.vercel.app](https://shadowpass-wheat.vercel.app) — the
+   transaction is published from your address on-chain
+3. Click **"Claim my spot on the registry"** (opens a pre-filled GitHub issue)
+   or submit your address via the in-app form on an API-backed deployment
+4. The operator verifies the address on the
+   [Midnight block explorer](https://preview.midnightexplorer.com) and merges
+   it into the registry
+
+Live count and progress toward the **70-user milestone**:
+[`docs/USERS.md`](docs/USERS.md) (verification method + acquisition channels)
+and `npm run registry -- status`.
 
 ---
 
@@ -489,7 +521,17 @@ verifiable on the [Midnight block explorer](https://preview.midnightexplorer.com
 | 2 | Browser proving with Lace | Done |
 | 3 | Preprod deployment, static live demo, CI/CD, tests, docs | Done |
 | 4 | Confidential Credentials -- issue/verify/revoke credential system | In progress |
-| 5 | 50 Preprod users, feedback loop, production polish | In progress |
+| 5 | 70 Preprod users, feedback loop, production polish | In progress |
+
+**Level 5 sub-goals**
+
+| Item | Status |
+| --- | --- |
+| Extended MVP (registry + analytics + tracking APIs) | Done |
+| Structured feedback loop documented (`docs/FEEDBACK.md`) | Done |
+| Preprod user registry + on-chain verification (`docs/USERS.md`) | In progress — 0/70 users |
+| 30+ meaningful commits this cycle | In progress |
+| Demo video (shot list: `docs/DEMO_VIDEO.md`) | In progress |
 
 ---
 
@@ -497,19 +539,25 @@ verifiable on the [Midnight block explorer](https://preview.midnightexplorer.com
 
 - **Public GitHub repository with full documentation** --
   [github.com/itsmypritam/shadowpass](https://github.com/itsmypritam/shadowpass)
+  -- README + [`docs/`](docs/)
 - **Live demo link** --
   [shadowpass-wheat.vercel.app](https://shadowpass-wheat.vercel.app)
 - **Preprod contract address** -- verifiable on the
   [Midnight block explorer](https://preview.midnightexplorer.com)
+- **70 Preprod users** -- verifiable wallet addresses tracked in
+  [`preprod-users.json`](preprod-users.json), verified on-chain
+  ([`docs/USERS.md`](docs/USERS.md))
 - **CI/CD badge** --
   [![CI](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml/badge.svg)](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml)
 - **Product X profile** --
   [@ShadowPassHQ](https://x.com/ShadowPassHQ) -- linked in README
-- **Demo video** -- full MVP walkthrough (browser prove + on-chain result)
-- **Feedback loop** -- structured feedback collection via API + in-app form
+- **Demo video** -- full MVP walkthrough; shot list + narration in
+  [`docs/DEMO_VIDEO.md`](docs/DEMO_VIDEO.md)
+- **Feedback loop documented** -- [`docs/FEEDBACK.md`](docs/FEEDBACK.md) +
+  structured collection (API / in-app form / GitHub templates)
 - **Preprod user tracking** --
-  [`preprod-users.json`](preprod-users.json)
-- **Minimum meaningful commits** -- 36+
+  [`preprod-users.json`](preprod-users.json) + `npm run registry`
+- **Minimum meaningful commits** -- target for this cycle: 30+
   [commits](https://github.com/itsmypritam/shadowpass/commits/main)
 
 ---
