@@ -1,0 +1,23 @@
+scripts/registry.ts
+  s_7965b2df3e5e68::t_7b6916f1da83f7 243-245
+  s_7965b2df3e5e68::t_c83014629719aa 224-225,229-230,234-235
+  s_7965b2df3e5e68::t_728735303f81a4 73
+  s_7965b2df3e5e68::t_e614dd1f17fa86 1-72,74-212,215,218,220-223,226-228,231-233,236-242,246-266
+  s_7965b2df3e5e68::t_80e969c74846a2 213-214,216-217,219
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a33762417d70c36309e933f81912c083cba6645e",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
