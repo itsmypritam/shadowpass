@@ -38,6 +38,9 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Validate user registry
+        run: npm run registry:validate
+
       - name: Build frontend
         run: npm run build:ui
 
