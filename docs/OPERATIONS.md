@@ -80,7 +80,38 @@ A clean verification is: open the address, confirm one or more outgoing
 transactions exist on Preprod against the deployed ShadowPass contract, mark
 `verified`. The indexer APIs are the same ones the app reads from.
 
-## 6. CI + release hygiene
+## 6. On-chain user sync (`npm run sync-users`)
+
+Real registry addresses come from the chain, not from a spreadsheet. The sync
+tool scans the Midnight indexer for transactions whose contract actions target
+the deployed ShadowPass contract and harvests the unshielded owners as
+verified users:
+
+```bash
+# dry-run (default): report what would be collected, write nothing
+npm run sync-users -- --network preprod --contract <hex>
+
+# merge the real addresses it found into preprod-users.json
+npm run sync-users -- --network preprod --contract <hex> --apply
+```
+
+Flow: find the tip → scan `--from-height..tip` (default: last 20_000 blocks) →
+match contract actions by contract address → dedupe owners → report with block
+heights. `--apply` only ever writes addresses the scanner actually saw
+on-chain; run without it first. The pure helpers are covered by
+`tests/sync-users.test.ts`.
+
+Operational notes:
+
+- The public indexers **rate-limit aggressive scanning** (HTTP 403). Prefer
+  short, targeted `--from-height` windows and modest `--concurrency`; block
+  fetches retry with backoff, but wait if an IP gets throttled.
+- The registry's `network` field guards against mixing Preprod and Preview
+  addresses; `--force` is required to sync a different network into the file.
+- `contractAction(address)` returns the live contract state — a cheap way to
+  confirm a deployment exists on a network before harvesting.
+
+## 7. CI + release hygiene
 
 - `.github/workflows/ci.yml` compiles the circuit, typechecks, runs all tests
   (contract + registry) and **validates the registry** on every push.
@@ -89,7 +120,7 @@ transactions exist on Preprod against the deployed ShadowPass contract, mark
 - The committed `preprod-users.json` means every user/feedback change is a
   reviewed, diffable commit — worth doing by hand under an hour.
 
-## 7. Failure modes
+## 8. Failure modes
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
