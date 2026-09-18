@@ -76,6 +76,47 @@ npm run sync-users -- --network preprod --contract <address> --apply
 Only addresses found in real transactions are ever added. See
 [docs/OPERATIONS.md](OPERATIONS.md) for indexer rate-limit notes.
 
+### 5a. Pre-provisioned wallet batch (jump-start to 70)
+
+The **operator-controlled batch** gives you 70 real Midnight wallets to drive
+the milestone the moment the contract is deployed:
+
+1. **Generate** 70 real wallets (BIP-39 phrases → valid `mn_addr_…` addresses):
+
+   ```bash
+   npm run generate-wallets -- --count 70 --network preprod
+   ```
+
+   Output lands in `.wallet-batch/preprod/` (gitignored — recovery phrases).
+   `addresses.txt` is the faucet paste-list.
+
+2. **Register** the batch (honest — `verified: false` until the chain agrees):
+
+   ```bash
+   npm run generate-wallets -- --from .wallet-batch/preprod --registry
+   ```
+
+3. **Fund** each wallet (faucet / `npm run fund <addr>` per wallet).
+
+4. **Verify** — each wallet performs one real on-chain eligibility check
+   against the deployed contract:
+
+   ```bash
+   npm run batch-verify -- --network preprod
+   ```
+
+   `--concurrency`, `--index-start`, `--limit` let you resume exactly where
+   something failed.
+
+5. **Harvest** — only wallets the indexer actually saw become VERIFIED:
+
+   ```bash
+   npm run sync-users -- --network preprod --contract <address> --apply
+   ```
+
+Until step 5 the registry correctly reports **70 registered, 0 verified** — the
+number never claims on-chain truth it doesn't have.
+
 ## 6. Feedback loop + tracking to 70
 
 Weekly cycle (see [docs/FEEDBACK.md](FEEDBACK.md)):

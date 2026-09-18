@@ -512,6 +512,12 @@ Live count and progress toward the **70-user milestone**:
 [`docs/USERS.md`](docs/USERS.md) (verification method + acquisition channels)
 and `npm run registry -- status`.
 
+> **Operator wallet batch** — 70 real Midnight wallets are pre-generated
+> (`.wallet-batch/`, gitignored) and registered so the milestone can be driven
+> in one pass: generate → fund → `npm run batch-verify` → `npm run sync-users
+> --apply`. The registry lists them as **registered but unverified** until the
+> indexer confirms each on-chain (docs/DEPLOY_PREPROD.md §5a).
+
 ---
 
 ## Roadmap

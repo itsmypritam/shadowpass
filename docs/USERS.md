@@ -114,3 +114,4 @@ The app also exposes live summaries:
 | Date | Users | Verified | Verifications | Notes |
 | --- | --- | --- | --- | --- |
 | _YYYY-MM-DD_ | 0 | 0 | 0 | Registry initialized |
+| 2026-09-19 | 70 | 0 | 0 | Generated-wallet batch registered (`npm run generate-wallets -- --registry`); verification on-chain pending Preprod deploy + funding + `batch-verify` + `sync-users --apply` (docs/DEPLOY_PREPROD.md §5a) |
