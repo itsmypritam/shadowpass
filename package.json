@@ -23,6 +23,8 @@
     "sync-users": "tsx scripts/sync-users.ts",
     "generate-wallets": "tsx scripts/generate-wallets.ts",
     "batch-verify": "tsx scripts/batch-verify.ts",
+    "fund-batch": "tsx scripts/fund-batch.ts",
+    "finish": "tsx scripts/finish.ts",
     "server": "tsx src/server.ts",
     "dev": "tsx scripts/dev.ts",
     "dev:ui": "vite src",

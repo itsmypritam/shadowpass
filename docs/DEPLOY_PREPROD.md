@@ -14,7 +14,7 @@ mission can be finished end-to-end by whoever holds a funded Midnight wallet.
 
 - Node.js >= 22, `npm install` done, `npm run compile` passing.
 - A Midnight **Preprod** wallet with funds:
-  - `mn1...` address (unshielded) funded with Midnight coins **and** DUST.
+  - `mn_addr_preprod...` address (unshielded) funded with Midnight coins **and** DUST.
   - You must be able to sign a deploy transaction (same account that drove the
     Preview demo works).
 - The Lace wallet extension on **Preprod** for browser-side proving when users
@@ -96,7 +96,16 @@ the milestone the moment the contract is deployed:
    npm run generate-wallets -- --from .wallet-batch/preprod --registry
    ```
 
-3. **Fund** each wallet (faucet / `npm run fund <addr>` per wallet).
+3. **Fund** the deployer wallet once from the faucet (Cloudflare-Turnstile
+   gated — the only human step), then distribute to the whole batch from that
+   single funded wallet:
+
+   ```bash
+   npm run fund-batch -- --network preprod
+   ```
+
+   Defaults to `.wallet-batch/preprod/addresses.txt`, 1 tNIGHT per recipient.
+   Re-run to retry any skipped rows.
 
 4. **Verify** — each wallet performs one real on-chain eligibility check
    against the deployed contract:
@@ -113,6 +122,14 @@ the milestone the moment the contract is deployed:
    ```bash
    npm run sync-users -- --network preprod --contract <address> --apply
    ```
+
+**One-command path (steps 1–5):** after the deployer is funded, run
+
+```bash
+npm run finish -- --network preprod
+```
+
+which chains deploy → fund-batch → batch-verify → sync-users `--apply`.
 
 Until step 5 the registry correctly reports **70 registered, 0 verified** — the
 number never claims on-chain truth it doesn't have.
