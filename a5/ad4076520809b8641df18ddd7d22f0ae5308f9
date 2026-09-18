@@ -1,0 +1,21 @@
+tests/registry.test.ts
+  s_7965b2df3e5e68::t_04039197500f71 150-154
+src/registry.ts
+  s_7965b2df3e5e68::t_d1a03390c1038c 62-67,73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a5ad4076520809b8641df18ddd7d22f0ae5308f9",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
