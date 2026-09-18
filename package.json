@@ -57,20 +57,21 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/ws": "^8.18.1",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^5.2.0",
     "tsx": "^4.23.1",
     "typescript": "^6.0.3",
-    "vite": "^5.4.11",
-    "vite-plugin-top-level-await": "^1.4.1",
-    "vite-plugin-wasm": "^3.3.0",
-    "vitest": "^2.1.9"
+    "vite": "^7.3.6",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
+    "vitest": "^4.1.11"
   },
   "engines": {
     "node": ">=22.0.0"
   },
   "overrides": {
     "@midnight-ntwrk/onchain-runtime-v3": "3.1.0",
-    "@swc/core": "1.15.47"
+    "@swc/core": "1.15.47",
+    "uuid": "^11.1.1"
   },
   "keywords": ["midnight", "blockchain", "zero-knowledge", "privacy"]
 }

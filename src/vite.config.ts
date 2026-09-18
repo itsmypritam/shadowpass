@@ -24,6 +24,12 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    // Target the modern baseline: ShadowPass requires WebAssembly + top-level
+    // await (Midnight wallet SDK), and vite-plugin-top-level-await otherwise
+    // down-levels the bundle with esbuild. Keeping it at "esnext" avoids
+    // esbuild re-transpiling already-modern syntax (which fails on newer
+    // esbuild) and matches the app's actual browser requirements.
+    target: 'esnext',
   },
   server: {
     port: 5173,
