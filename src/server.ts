@@ -7,9 +7,14 @@
  * here, which keeps the private score inside the zero-knowledge proof.
  *
  * Endpoints:
- *   GET  /api/health    -> { ok: true }
- *   GET  /api/contract  -> public ledger state of the deployed contract
- *   POST /api/verify    -> { claimedEligible, eligibilityScore } -> tx info
+ *   GET  /api/health     -> { ok: true }
+ *   GET  /api/contract   -> public ledger state of the deployed contract
+ *   GET  /api/users      -> Preprod user registry + summary (markdown export)
+ *   GET  /api/analytics  -> registry analytics + contract state
+ *   POST /api/verify     -> { claimedEligible, eligibilityScore } -> tx info
+ *   POST /api/feedback   -> record structured user feedback
+ *   POST /api/track-user -> register a (pre-)Preprod wallet address
+ *   POST /api/track-verification -> attribute one on-chain verification to a wallet
  *
  * Run with: npm run server   (proxied by Vite at /api during `npm run dev:ui`)
  */
@@ -37,6 +42,14 @@ import {
   unshieldedToken,
   type WalletContext,
 } from '../scripts/wallet';
+import {
+  addUser,
+  loadRegistry,
+  recordVerification,
+  saveRegistry,
+  summarize,
+  usersToMarkdown,
+} from './registry';
 
 // @ts-expect-error wallet sync requires WebSocket
 globalThis.WebSocket = WebSocket;
