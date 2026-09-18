@@ -342,10 +342,11 @@ testkit -- no blockchain or proof server required:
 - verifier-side re-check of a generated proof
 
 ```text
-✓ tests/shadow-pass.test.ts (9 tests) 182ms
+✓ tests/registry.test.ts (16 tests) 4ms
+✓ tests/shadow-pass.test.ts (9 tests) 226ms
 
- Test Files  1 passed (1)
-      Tests  9 passed (9)
+ Test Files  2 passed (2)
+      Tests  25 passed (25)
 ```
 
 ---
@@ -357,8 +358,12 @@ pull request:
 
 1. installs the pinned **compact compiler** (`midnightntwrk/setup-compact-action`)
 2. `npm install` -> `npm run compile` -> typecheck (server + frontend) ->
-   `npm test` -> `vite build`
+   `npm test` -> **`npm run registry:validate`** -> `vite build`
 3. uploads the built frontend as a workflow artifact
+
+The registry validation step keeps the committed `preprod-users.json` healthy
+(unique, well-formed wallet addresses; valid feedback ratings), so the
+70-user milestone list stays reviewable in CI.
 
 Status: [![CI](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml/badge.svg)](https://github.com/itsmypritam/shadowpass/actions/workflows/ci.yml)
 
@@ -389,20 +394,24 @@ straight from the indexer and verification happens entirely in the browser.
 ```
 +-- contract/shadow-pass.compact   # the Midnight circuit (source of truth)
 +-- managed/                       # compiler output (committed)
-+-- tests/                         # 9 contract tests + testkit simulator
-+-- scripts/                       # network/wallet/deploy/setup/cli/e2e/dev
++-- tests/                         # 25 contract + registry tests
++-- scripts/                       # network/wallet/deploy/setup/cli/e2e/registry
 +-- src/
-|   +-- App.tsx, styles.css        # React UI
-|   +-- lace.ts                    # Lace discovery + connect
-|   +-- browser-contract.ts        # browser providers + verify + public read
-|   +-- zk-assets-plugin.ts        # Vite /zk artifact serving + copy
-|   +-- server.ts                  # Node API (dev-mode fallback)
-|   +-- vite.config.ts             # Vite (wasm, top-level-await, zk plugin)
-+-- .github/workflows/ci.yml       # compile + test + build on every push
-+-- PROPOSAL.md                    # Age / Eligibility Gate product proposal
-+-- PROPOSAL_L4.md                 # Level 4 Confidential Credentials proposal
-+-- preprod-users.json             # Preprod user wallet tracking + feedback
-+-- vercel.json                    # static hosting config
++|   +-- App.tsx, styles.css        # React UI (verify + registry + feedback)
++|   +-- lace.ts                    # Lace discovery + connect
++|   +-- browser-contract.ts        # browser providers + verify + public read
++|   +-- registry.ts                # user registry schema + validation (shared)
++|   +-- zk-assets-plugin.ts        # Vite /zk artifact serving + copy
++|   +-- server.ts                  # Node API (verify, registry, feedback)
++|   +-- vite.config.ts             # Vite (wasm, top-level-await, zk plugin)
++-- docs/                           # FEEDBACK.md, USERS.md, OPERATIONS.md, DEMO_VIDEO.md
++-- .github/
++|   +-- workflows/ci.yml           # compile + test + registry validate + build
++|   +-- ISSUE_TEMPLATE/            # structured feedback + registry-claim issues
++-- PROPOSAL.md                     # Age / Eligibility Gate product proposal
++-- PROPOSAL_L4.md                  # Level 4 Confidential Credentials proposal
++-- preprod-users.json              # Preprod user registry + feedback (committed)
++-- vercel.json                     # static hosting config
 ```
 
 ---
@@ -415,9 +424,19 @@ tweet -> https://x.com/Shadowpassmid/status/2090427851397058971?s=20
 -----------
 ## Feedback
 
-We collect structured user feedback to improve ShadowPass. After trying the
-demo, submit your experience via the in-app feedback form at the bottom of the
-page, or directly through the API:
+We collect **structured** user feedback — rating, use case, comment, wallet
+address — and run it through a documented loop (collect -> triage ->
+prioritize -> ship -> measure). The full process lives in
+[`docs/FEEDBACK.md`](docs/FEEDBACK.md).
+
+Ways to share feedback:
+
+1. **In-app form** (API-backed deployment) -- posted to `POST /api/feedback`
+   and stored in [`preprod-users.json`](preprod-users.json).
+2. **In-app form** (hosted static demo) -- opens a pre-filled GitHub issue.
+3. **GitHub issues** -- use the
+   [`feedback template`](.github/ISSUE_TEMPLATE/feedback.yml).
+4. **Directly via the API:**
 
 ```bash
 curl -X POST http://localhost:3000/api/feedback \
