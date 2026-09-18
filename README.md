@@ -33,6 +33,8 @@ reason**.
 - [Privacy model](#privacy-model)
 - [Live demo](#live-demo)
 - [User onboarding guide](#user-onboarding-guide)
+- [Level 5: live product, feedback loop, 70 Preprod users](#level-5-live-product-feedback-loop-70-preprod-users)
+- [Documentation](#documentation)
 - [Architecture](#architecture)
 - [Tech stack](#tech-stack)
 - [Quick start (local devnet)](#quick-start-local-devnet)
@@ -42,6 +44,7 @@ reason**.
 - [Deployment](#deployment)
 - [Project structure](#project-structure)
 - [Feedback](#feedback)
+- [User registry CLI](#user-registry-cli)
 - [Product proposal](#product-proposal)
 - [Preprod users](#preprod-users)
 - [Roadmap](#roadmap)
@@ -77,7 +80,7 @@ cryptographically verifiable by anyone, not merely trusted.
 | | **Cheat-proof by construction** | A false claim fails the circuit and the transaction is rejected on-chain (tested) |
 | | **Transparent ledger** | `requirement`, `verificationCount`, `lastResult` are public; every proof re-verifiable on-chain |
 | | **Two proving paths** | Browser proving via the **Lace** wallet (static build) and a server-side Node wallet (interactive demo) |
-| | **9 passing tests** | Pure testkit suite -- no blockchain required; runs in CI on every push |
+| | **25 passing tests** | Contract (testkit) + user-registry suites; no chain required; runs in CI on every push |
 | | **CI/CD** | Compact compile -> typecheck -> tests -> production build on every push |
 | | **Static, backend-less deploy** | Reads state straight from the public indexer; proving runs in the browser |
 
@@ -185,6 +188,39 @@ ShadowPass is live on the Midnight **Preprod** network. Here is how to try it:
 - **Wallet network mismatch** -- switch Lace to Preprod and reconnect.
 - **Proof server unavailable** -- the browser path requires no proof server;
   ensure you selected "Lace browser wallet" as the verify path.
+
+---
+
+## Level 5: live product, feedback loop, 70 Preprod users
+
+ShadowPass is now a **live product with a real feedback loop**:
+
+- **Public Preprod registry** -- every verified wallet address is tracked,
+  listed on-chain-style, and diffable in
+  [`preprod-users.json`](preprod-users.json). Users register in-app, the
+  operator verifies each address on the Midnight explorer, and `CI` validates
+  the file on every push.
+- **Structured feedback** -- rating (1-5), use case and comment captured via
+  the in-app form (API-backed deployments), pre-filled GitHub issues on the
+  hosted static demo, and a triage/prioritize/ship/measure loop documented in
+  [`docs/FEEDBACK.md`](docs/FEEDBACK.md).
+- **Extended MVP** -- new API endpoints (`/api/users`, `/api/analytics`,
+  `/api/track-verification`), a registry CLI, GitHub issue templates, and a
+  live "Preprod users" section in the app.
+
+Progress is tracked with [`docs/USERS.md`](docs/USERS.md) (how users are
+acquired, verified and counted toward the 70-wallet milestone).
+
+---
+
+## Documentation
+
+| Document | Contents |
+| --- | --- |
+| [`docs/FEEDBACK.md`](docs/FEEDBACK.md) | The feedback loop: collect -> triage -> prioritize -> ship -> measure |
+| [`docs/USERS.md`](docs/USERS.md) | Personas, onboarding funnel, on-chain verification, progress to 70 users |
+| [`docs/OPERATIONS.md`](docs/OPERATIONS.md) | Operator runbook: API, registry CLI, failure modes |
+| [`docs/DEMO_VIDEO.md`](docs/DEMO_VIDEO.md) | Shot list + narration for the demo video |
 
 ---
 
