@@ -221,6 +221,7 @@ acquired, verified and counted toward the 70-wallet milestone).
 | [`docs/USERS.md`](docs/USERS.md) | Personas, onboarding funnel, on-chain verification, progress to 70 users |
 | [`docs/OPERATIONS.md`](docs/OPERATIONS.md) | Operator runbook: API, registry CLI, failure modes |
 | [`docs/DEMO_VIDEO.md`](docs/DEMO_VIDEO.md) | Shot list + narration for the demo video |
+| [`docs/DEPLOY_PREPROD.md`](docs/DEPLOY_PREPROD.md) | Go-live runbook: fund, deploy to Preprod, reach 70 users |
 
 ---
 
@@ -557,8 +558,44 @@ and `npm run registry -- status`.
   structured collection (API / in-app form / GitHub templates)
 - **Preprod user tracking** --
   [`preprod-users.json`](preprod-users.json) + `npm run registry`
+- **Go-live runbook** -- [`docs/DEPLOY_PREPROD.md`](docs/DEPLOY_PREPROD.md):
+  deploy to Preprod, collect + harvest real users, close out at 70
 - **Minimum meaningful commits** -- target for this cycle: 30+
   [commits](https://github.com/itsmypritam/shadowpass/commits/main)
+
+---
+
+## FAQ
+
+### Are the user registry addresses real or fabricated?
+
+**Real.** `preprod-users.json` starts empty and is only ever extended with
+addresses that were either (a) collected from real onboarding, or (b) **harvested
+on-chain** — `npm run sync-users -- --network preprod --contract <hex> --apply`
+scans the Midnight indexer and merges only the wallet addresses it actually saw
+transacting against the deployed contract. All edits are committed and CI
+validates structure, uniqueness and feedback ratings on every push.
+
+### How does the project reach the 70-user milestone?
+
+The full playbook lives in [`docs/DEPLOY_PREPROD.md`](docs/DEPLOY_PREPROD.md):
+fund a Preprod wallet, deploy, share the demo, collect claims, then verify and
+harvest on-chain. [`docs/USERS.md`](docs/USERS.md) defines what counts as a
+user and how each address is verified; progress is tracked with
+`npm run registry -- status`.
+
+### Can I run the live demo without installing anything?
+
+Yes — [`shadowpass-wheat.vercel.app`](https://shadowpass-wheat.vercel.app) runs
+in static mode: proof and submission happen entirely in the browser via Lace.
+In that mode feedback and registry claims open pre-filled GitHub issues.
+
+### Where does the product learn what to build next?
+
+From the feedback loop in [`docs/FEEDBACK.md`](docs/FEEDBACK.md): structured
+ratings + comments collected in-app, on GitHub, or via
+`npm run registry -- feedback add`, triaged weekly, prioritized by impact, and
+shipped with the issue number linked in the commit.
 
 ---
 
