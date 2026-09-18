@@ -637,6 +637,9 @@ function TopNav() {
           <li>
             <a href="#try-it">Contract</a>
           </li>
+          <li>
+            <a href="#registry">Registry</a>
+          </li>
         </ul>
 
         <div className="nav-actions">
@@ -942,6 +945,123 @@ function CtaBanner() {
   );
 }
 
+function RegistrySection({
+  registry,
+  registryError,
+  connectedAddress,
+  lastTx,
+}: {
+  registry: UsersResponse | null;
+  registryError: string | null;
+  connectedAddress?: string;
+  lastTx: { txId: string; blockHeight: string } | null;
+}) {
+  const summary = registry?.summary;
+  const remaining = summary ? Math.max(0, 70 - summary.userCount) : null;
+
+  const claimRegistrySpot = () => {
+    const address = connectedAddress?.trim();
+    if (!address) return;
+    const txLine = lastTx
+      ? `\n\n**on-chain transaction:** \`${lastTx.txId}\` (block ${lastTx.blockHeight})`
+      : '\n\n_(no verification recorded in this session yet)_';
+    openGitHubIssue(
+      'Claim my place on the ShadowPass Preprod registry',
+      [
+        '## Registry request',
+        '',
+        'I completed a zero-knowledge verification with ShadowPass on Midnight **Preprod**.',
+        '',
+        `**wallet address:** \`${address}\``,
+        txLine,
+        '',
+        '<!-- The operator verifies this address on-chain before merging. -->',
+      ].join('\n'),
+    );
+  };
+
+  return (
+    <section className="section section-soft" id="registry">
+      <div className="container">
+        <p className="section-eyebrow">
+          <span className="badge badge-tag-purple">PREPROD USERS</span>
+        </p>
+        <h2>Prove it in the community.</h2>
+        <p className="section-sub">
+          A public, verifiable registry of Preprod wallets that used ShadowPass.
+          Your address is checked against the chain — every entry is traceable.
+        </p>
+
+        {summary ? (
+          <div className="registry-grid">
+            <div className="registry-stat">
+              <span className="registry-stat-value">{summary.userCount}</span>
+              <span className="registry-stat-label">registered users</span>
+            </div>
+            <div className="registry-stat">
+              <span className="registry-stat-value">{summary.verifiedCount}</span>
+              <span className="registry-stat-label">verified on-chain</span>
+            </div>
+            <div className="registry-stat">
+              <span className="registry-stat-value">{summary.feedbackCount}</span>
+              <span className="registry-stat-label">feedback entries</span>
+            </div>
+            <div className="registry-stat">
+              <span className="registry-stat-value">
+                {summary.avgRating === null ? '—' : `${summary.avgRating.toFixed(1)}★`}
+              </span>
+              <span className="registry-stat-label">average rating</span>
+            </div>
+          </div>
+        ) : (
+          <div className="registry-loading">
+            {isStaticMode
+              ? 'Hosted demo: the live registry is maintained by the operator — initialize it from the API-backed deployment or a registry pull request.'
+              : registryError
+                ? `Registry unavailable: ${registryError}`
+                : 'Loading the community registry…'}
+          </div>
+        )}
+
+        {remaining !== null && remaining > 0 && (
+          <div className="verify-result info registry-progress">
+            {remaining} registration{remaining === 1 ? '' : 's'} to go until the first
+            70-wallet milestone.
+          </div>
+        )}
+
+        <div className="registry-actions">
+          {connectedAddress ? (
+            <button className="btn btn-primary" onClick={claimRegistrySpot}>
+              Claim my spot on the registry
+            </button>
+          ) : (
+            <a className="btn btn-secondary disabled-btn" href="#try-it">
+              Connect Lace to claim your wallet on the registry
+            </a>
+          )}
+          <a
+            className="btn btn-secondary"
+            href="https://github.com/itsmypritam/shadowpass/blob/main/docs/USERS.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            How users are verified
+          </a>
+          <a
+            className="btn btn-secondary"
+            href="https://github.com/itsmypritam/shadowpass/issues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Registry requests &amp; feedback
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FeedbackSection({ walletAddress }: { walletAddress?: string }) {
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
@@ -956,8 +1076,27 @@ function FeedbackSection({ walletAddress }: { walletAddress?: string }) {
     setSubmitting(true);
     setError(null);
     try {
-      await submitFeedback({ walletAddress, rating, comment, useCase });
-      setSubmitted(true);
+      if (isStaticMode) {
+        const body = [
+          '## Feedback',
+          '',
+          walletAddress ? `**Wallet address:** \`${walletAddress}\`` : '',
+          '',
+          '**Rating:** ' + rating + '/5',
+          '**Use case:** ' + (useCase || '—'),
+          '',
+          '**Comment:**',
+          '',
+          comment || '_(no comment)_',
+        ]
+          .filter((line) => line !== '')
+          .join('\n');
+        openGitHubIssue('Feedback: ShadowPass experience', body);
+        setSubmitted(true);
+      } else {
+        await submitFeedback({ walletAddress, rating, comment, useCase });
+        setSubmitted(true);
+      }
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -1028,12 +1167,23 @@ function FeedbackSection({ walletAddress }: { walletAddress?: string }) {
 
             {error && <div className="verify-result err">{error}</div>}
 
+            {isStaticMode && (
+              <div className="verify-result info">
+                This hosted demo has no backend — your feedback opens a pre-filled GitHub
+                issue. The operator reviews it and merges it into the public registry.
+              </div>
+            )}
+
             <button
               className="btn btn-primary"
               onClick={() => void onSubmit()}
               disabled={submitting || !rating}
             >
-              {submitting ? 'Submitting...' : 'Submit feedback'}
+              {submitting
+                ? 'Submitting...'
+                : isStaticMode
+                  ? 'Submit feedback (opens GitHub)'
+                  : 'Submit feedback'}
             </button>
           </div>
         )}
@@ -1064,6 +1214,7 @@ function Footer({ address }: { address?: string }) {
             <li><a href="#how-it-works">How it works</a></li>
             <li><a href="#try-it">Verify</a></li>
             <li><a href="#why-private">Public vs private</a></li>
+            <li><a href="#registry">Registry &amp; feedback</a></li>
           </ul>
         </div>
 
