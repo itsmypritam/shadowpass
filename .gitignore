@@ -67,6 +67,9 @@ temp/
 # Local LevelDB private-state cache (server-side level provider)
 midnight-level-db/
 
+# Generated wallet batch (contains recovery phrases — NEVER commit)
+.wallet-batch/
+
 # Lockfile is git-ignored: native optional deps (rollup/esbuild/smoldot)
 # differ per platform (Windows dev vs Linux CI) and break npm ci.
 package-lock.json

@@ -21,6 +21,8 @@
     "registry": "tsx scripts/registry.ts",
     "registry:validate": "tsx scripts/registry.ts validate",
     "sync-users": "tsx scripts/sync-users.ts",
+    "generate-wallets": "tsx scripts/generate-wallets.ts",
+    "batch-verify": "tsx scripts/batch-verify.ts",
     "server": "tsx src/server.ts",
     "dev": "tsx scripts/dev.ts",
     "dev:ui": "vite src",
