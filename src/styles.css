@@ -1426,3 +1426,80 @@ code {
   color: var(--moss-dark);
   line-height: 1.5;
 }
+
+/* ============================================================
+   Preprod user registry
+   ============================================================ */
+.registry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-xl);
+  margin-top: var(--sec);
+}
+
+.registry-stat {
+  text-align: center;
+  padding: var(--sp-lg);
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-xxl);
+  display: grid;
+  gap: var(--sp-xs);
+}
+
+.registry-stat-value {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--ink);
+}
+
+.registry-stat-label {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+.registry-loading {
+  max-width: 640px;
+  margin: var(--sec) auto 0;
+  text-align: center;
+  font-size: 15px;
+  color: var(--slate);
+}
+
+.registry-progress {
+  max-width: 640px;
+  margin: var(--sp-xl) auto 0;
+  text-align: center;
+}
+
+.registry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-xl);
+}
+
+.registry-actions .btn {
+  text-align: center;
+}
+
+.disabled-btn {
+  opacity: 0.65;
+  cursor: default;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .registry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .registry-grid {
+    grid-template-columns: 1fr;
+  }
+}
