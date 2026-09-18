@@ -1,0 +1,28 @@
+src/api.ts
+  s_e4856d7dee91ae::t_a2b6d9b2df5c2d 20-24,26,36
+src/server.ts
+  s_e4856d7dee91ae::t_ee6c6965062d91 266-270
+  s_e4856d7dee91ae::t_daf800352e2fbb 51-74
+  s_e4856d7dee91ae::t_497cb98c38cd73 97-124
+README.md
+  s_e4856d7dee91ae::t_b24278651ad0fe 23,26-27,29-30,32-43
+  s_e4856d7dee91ae::t_d1d496ec08bd54 15
+.gitignore
+  s_e4856d7dee91ae::t_cdaee3e2e680fd 72-73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "290455f8cd7cfe08a4fb022edfd0816954267774",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

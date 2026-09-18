@@ -1,0 +1,14 @@
+.github/workflows/ci.yml
+  h_7aa35c57e7bf7b 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "9fc70ee0385fc6360c20023764bb44e084acd4aa",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

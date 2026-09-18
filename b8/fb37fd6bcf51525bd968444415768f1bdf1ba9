@@ -1,0 +1,24 @@
+src/App.tsx
+  h_7aa35c57e7bf7b 1-986
+src/index.html
+  h_7aa35c57e7bf7b 1-22
+src/main.tsx
+  h_7aa35c57e7bf7b 1-10
+src/styles.css
+  h_7aa35c57e7bf7b 1-1341
+src/tsconfig.json
+  h_7aa35c57e7bf7b 1-16
+src/vite-env.d.ts
+  h_7aa35c57e7bf7b 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "b8fb37fd6bcf51525bd968444415768f1bdf1ba9",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

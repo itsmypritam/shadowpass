@@ -1,0 +1,16 @@
+PROPOSAL.md
+  h_7aa35c57e7bf7b 1-89
+README.md
+  h_7aa35c57e7bf7b 1-223
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "85e9892ed697afc76df99cf057648d1dff9e64b0",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

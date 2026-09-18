@@ -1,0 +1,24 @@
+scripts/fund.ts
+  s_e4856d7dee91ae::t_d6d5e756ece096 1-39,43-51,53-60,62-67,76-82
+  s_e4856d7dee91ae::t_4fa697d9969a0d 40-42
+  s_e4856d7dee91ae::t_cb2fa8dfe09254 52
+  s_e4856d7dee91ae::t_f6d4db3b4cb7b5 61
+  s_e4856d7dee91ae::t_5e76cf5cdb8285 68,70-75
+  s_e4856d7dee91ae::t_5998b2f8fe955f 69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e17c6a9be5af5d944276236aee1c2b9dbc2e85b9",
+  "prompts": {},
+  "sessions": {
+    "s_e4856d7dee91ae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00388393cffeY0lNwelDGlOI7i",
+        "model": "unknown"
+      },
+      "human_author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

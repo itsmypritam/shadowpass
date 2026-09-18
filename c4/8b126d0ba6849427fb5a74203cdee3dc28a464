@@ -1,0 +1,16 @@
+src/api.ts
+  h_7aa35c57e7bf7b 1-39
+src/server.ts
+  h_7aa35c57e7bf7b 1-233
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "c48b126d0ba6849427fb5a74203cdee3dc28a464",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}

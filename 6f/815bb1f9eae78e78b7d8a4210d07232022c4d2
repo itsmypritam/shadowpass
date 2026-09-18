@@ -1,0 +1,26 @@
+.gitignore
+  h_7aa35c57e7bf7b 1-68
+DESIGN.md
+  h_7aa35c57e7bf7b 1-825
+LICENSE
+  h_7aa35c57e7bf7b 1-21
+docker-compose.yml
+  h_7aa35c57e7bf7b 1-95
+package-lock.json
+  h_7aa35c57e7bf7b 1-5704
+package.json
+  h_7aa35c57e7bf7b 1-68
+tsconfig.json
+  h_7aa35c57e7bf7b 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "6f815bb1f9eae78e78b7d8a4210d07232022c4d2",
+  "prompts": {},
+  "humans": {
+    "h_7aa35c57e7bf7b": {
+      "author": "itsmypritam <pritamsdev2@gmail.com>"
+    }
+  }
+}
