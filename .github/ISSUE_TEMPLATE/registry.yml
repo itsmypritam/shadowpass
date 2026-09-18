@@ -1,0 +1,30 @@
+---
+name: "🏆 Registry request"
+about: Claim your place on the public ShadowPass Preprod user registry (70-user milestone)
+title: "Registry: [wallet address]"
+labels: ["registry"]
+assignees: []
+---
+
+<!-- The operator verifies your address on-chain (this repo's feedback loop
+     and docs/USERS.md) before merging it into preprod-users.json. -->
+
+## Registry request
+
+I completed a zero-knowledge verification with ShadowPass on Midnight **Preprod**.
+
+**Wallet address:**
+```
+mn1...
+```
+
+**On-chain transaction** (tx id + block height, optional but helps verification):
+tx `...` · block `...`
+
+**Did you submit feedback too?** (yes / no / link to issue)
+
+---
+Here is how the operator verifies the address before merging:
+1. Address checks out structurally (bech32-like, `mn1...`).
+2. The transaction appears on the Midnight Preprod indexer/explorer.
+3. It gets added with `npm run registry -- verify <address>` and committed.
