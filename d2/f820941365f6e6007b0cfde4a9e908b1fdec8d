@@ -1,0 +1,30 @@
+docs/DEPLOY_PREPROD.md
+  s_7965b2df3e5e68::t_5b2439e2e40ac7 99-108,126-132
+  s_7965b2df3e5e68::t_63cf7f45cf6daf 17
+  s_7965b2df3e5e68::t_b6c7691eb595bf 133
+scripts/fund-batch.ts
+  s_7965b2df3e5e68::t_a577ba1885c860 1-115
+package.json
+  s_7965b2df3e5e68::t_d06ed1a0af6cab 26
+  s_7965b2df3e5e68::t_0ae9329ea0fe6f 27
+scripts/finish.ts
+  s_7965b2df3e5e68::t_a9c7330f73e1dd 1-51,54-85,88-91
+  s_7965b2df3e5e68::t_0795afcb227524 52-53
+  s_7965b2df3e5e68::t_d8b08cb98b4baf 86-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d2f820941365f6e6007b0cfde4a9e908b1fdec8d",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
