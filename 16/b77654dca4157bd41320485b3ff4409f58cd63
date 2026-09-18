@@ -1,0 +1,25 @@
+src/App.tsx
+  s_7965b2df3e5e68::t_5840576b3ea8e8 474-479
+  s_7965b2df3e5e68::t_3570b2c4a787f7 182-185
+  s_7965b2df3e5e68::t_564b0237da99ed 118-121
+  s_7965b2df3e5e68::t_4f2a78dc7d0560 44-51
+  s_7965b2df3e5e68::t_95882281dba8c6 3-11
+  s_7965b2df3e5e68::t_f8a4b5c3659939 85-86,92-96,102-105
+  s_7965b2df3e5e68::t_a359e767700551 2,52,106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "16b77654dca4157bd41320485b3ff4409f58cd63",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
