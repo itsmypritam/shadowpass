@@ -1,0 +1,20 @@
+package.json
+  s_7965b2df3e5e68::t_6562d3e982c89f 23
+  s_7965b2df3e5e68::t_a2dc77483e4bbc 21-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "755b05d12678540623e7b183839388eff7c877ce",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
