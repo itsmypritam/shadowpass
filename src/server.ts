@@ -286,25 +286,21 @@ async function main() {
         if (!rating || rating < 1 || rating > 5) {
           return send(res, 400, { error: 'rating must be 1-5' });
         }
-        const entry = {
+        const data = loadRegistry();
+        data.feedback.push({
           walletAddress,
           rating,
           comment,
           useCase,
           submittedAt: new Date().toISOString(),
-        };
-        const feedbackPath = path.join(__dirname, '..', '..', 'preprod-users.json');
-        let data: any = { users: [], feedback: [] };
-        if (fs.existsSync(feedbackPath)) {
-          data = JSON.parse(fs.readFileSync(feedbackPath, 'utf-8'));
+        });
+        if (walletAddress !== 'anonymous') {
+          addUser(data, walletAddress);
         }
-        data.feedback.push(entry);
-        if (walletAddress !== 'anonymous' && !data.users.includes(walletAddress)) {
-          data.users.push(walletAddress);
-        }
-        fs.writeFileSync(feedbackPath, JSON.stringify(data, null, 2) + '\n');
+        saveRegistry(data);
+        const summary = summarize(data);
         console.log(`  feedback: wallet=${walletAddress} rating=${rating}`);
-        return send(res, 200, { ok: true, userCount: data.users.length, feedbackCount: data.feedback.length });
+        return send(res, 200, { ok: true, ...summary });
       } catch (e: any) {
         return send(res, 500, { error: e.message ?? String(e) });
       }
@@ -317,17 +313,57 @@ async function main() {
         if (!walletAddress || typeof walletAddress !== 'string') {
           return send(res, 400, { error: 'walletAddress is required' });
         }
-        const feedbackPath = path.join(__dirname, '..', '..', 'preprod-users.json');
-        let data: any = { users: [], feedback: [] };
-        if (fs.existsSync(feedbackPath)) {
-          data = JSON.parse(fs.readFileSync(feedbackPath, 'utf-8'));
+        const data = loadRegistry();
+        const added = addUser(data, walletAddress);
+        saveRegistry(data);
+        const summary = summarize(data);
+        if (added) console.log(`  track-user: new wallet ${walletAddress} (total: ${summary.userCount})`);
+        return send(res, 200, { ok: true, added, ...summary });
+      } catch (e: any) {
+        return send(res, 500, { error: e.message ?? String(e) });
+      }
+    }
+
+    if (req.method === 'POST' && route === '/api/track-verification') {
+      try {
+        const body = await readBody(req);
+        const walletAddress = body.walletAddress;
+        if (!walletAddress || typeof walletAddress !== 'string') {
+          return send(res, 400, { error: 'walletAddress is required' });
         }
-        if (!data.users.includes(walletAddress)) {
-          data.users.push(walletAddress);
-          fs.writeFileSync(feedbackPath, JSON.stringify(data, null, 2) + '\n');
-          console.log(`  track-user: new wallet ${walletAddress} (total: ${data.users.length})`);
-        }
-        return send(res, 200, { ok: true, userCount: data.users.length });
+        const data = loadRegistry();
+        recordVerification(data, walletAddress);
+        saveRegistry(data);
+        const summary = summarize(data);
+        console.log(`  track-verification: ${walletAddress} (verified: ${summary.verifiedCount})`);
+        return send(res, 200, { ok: true, ...summary });
+      } catch (e: any) {
+        return send(res, 500, { error: e.message ?? String(e) });
+      }
+    }
+
+    if (req.method === 'GET' && route === '/api/users') {
+      try {
+        const data = loadRegistry();
+        const urlHost = req.headers.host ?? 'localhost';
+        const explorerUrl = new URL(`/contracts/${contractAddress}`, `https://${urlHost}`);
+        return send(res, 200, {
+          network: data.network,
+          registry: data.users,
+          summary: summarize(data),
+          explorerBase: 'https://preview.midnightexplorer.com',
+          explorerUrl: explorerUrl.toString(),
+          markdown: usersToMarkdown(data),
+        });
+      } catch (e: any) {
+        return send(res, 500, { error: e.message ?? String(e) });
+      }
+    }
+
+    if (req.method === 'GET' && route === '/api/analytics') {
+      try {
+        const data = loadRegistry();
+        return send(res, 200, { summary: summarize(data), contract: await readContractState() });
       } catch (e: any) {
         return send(res, 500, { error: e.message ?? String(e) });
       }
