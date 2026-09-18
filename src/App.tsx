@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getContractInfo, submitVerification, submitFeedback, type ContractInfo } from './api';
+import {
+  getContractInfo,
+  submitVerification,
+  submitFeedback,
+  trackUser,
+  trackVerification,
+  getUsers,
+  type ContractInfo,
+  type UsersResponse,
+} from './api';
 import {
   connectMidnightWallet,
   getWalletBalances,
@@ -31,6 +40,15 @@ const SHORT_ADDRESS = (a: string) =>
 const SHORT_URL = (u?: string) => (u && u.length > 40 ? `${u.slice(0, 34)}…` : u ?? '—');
 
 const hasDust = (dust: string | undefined) => !!dust && dust !== '0';
+
+const GITHUB_REPO = 'itsmypritam/shadowpass';
+
+function openGitHubIssue(title: string, body: string) {
+  const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(
+    title,
+  )}&body=${encodeURIComponent(body)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
 function loadContract(): Promise<ContractInfo> {
   if (isStaticMode) {
@@ -64,15 +82,27 @@ export default function App() {
   const [walletBusy, setWalletBusy] = useState(false);
   const [browserState, setBrowserState] = useState<ContractInfo | null>(null);
   const [browserStateError, setBrowserStateError] = useState<string | null>(null);
+  const [registry, setRegistry] = useState<UsersResponse | null>(null);
+  const [registryError, setRegistryError] = useState<string | null>(null);
 
   useEffect(() => {
     loadContract()
       .then(setContract)
       .catch((e: Error) => setLoadError(e.message));
+    if (!isStaticMode) {
+      getUsers()
+        .then(setRegistry)
+        .catch((e: Error) => setRegistryError(e.message));
+    }
   }, []);
 
   const refresh = () =>
     loadContract().then(setContract).catch((e: Error) => setLoadError(e.message));
+
+  const refreshRegistry = () =>
+    getUsers()
+      .then(setRegistry)
+      .catch((e: Error) => setRegistryError(e.message));
 
   const walletInstalled = isWalletInstalled();
   const contractNetwork = contract?.network ?? staticNetworkId ?? 'undeployed';
@@ -85,6 +115,10 @@ export default function App() {
       setWallet(handle);
       const balances = await getWalletBalances(handle);
       setWalletBalances(balances);
+      const userAddress = balances?.unshieldedAddress;
+      if (userAddress && !isStaticMode) {
+        trackUser(userAddress).then(refreshRegistry).catch(() => undefined);
+      }
       if (contract) {
         readBrowserContractState(handle, contract.address)
           .then(setBrowserState)
@@ -145,6 +179,10 @@ export default function App() {
         setLastTx({ txId: response.txId, blockHeight: response.blockHeight });
       }
       await refresh();
+      const userAddress = walletBalances?.unshieldedAddress;
+      if (userAddress && !isStaticMode) {
+        trackVerification(userAddress).then(refreshRegistry).catch(() => undefined);
+      }
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -433,6 +471,12 @@ export default function App() {
       </section>
 
       <CtaBanner />
+      <RegistrySection
+        registry={registry}
+        registryError={registryError}
+        connectedAddress={walletBalances?.unshieldedAddress}
+        lastTx={lastTx}
+      />
       <FeedbackSection walletAddress={walletBalances?.unshieldedAddress} />
       <Footer address={contract?.address} />
     </div>
