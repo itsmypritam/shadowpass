@@ -147,6 +147,11 @@ describe('registry: validation', () => {
     expect(isPlausibleAddress(SAMPLE_ADDR)).toBe(true);
   });
 
+  it('accepts both SDK bech32m and compact-form Midnight addresses', () => {
+    expect(isPlausibleAddress('mn_addr_preprod1h3ssm5ru2t6eqy4g3she78zlxn96e36ms6pq996aduvmateh9p9sv7qz0p')).toBe(true);
+    expect(isPlausibleAddress('mn1q3v75gzhkj8s6l4ky9maxcfx3j5yzy9q7jv5')).toBe(true);
+  });
+
   it('rejects clearly invalid addresses', () => {
     expect(isPlausibleAddress('')).toBe(false);
     expect(isPlausibleAddress('hello')).toBe(false);

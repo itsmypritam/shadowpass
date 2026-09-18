@@ -59,13 +59,18 @@ export interface RegistrySummary {
   ratingDistribution: Record<number, number>;
 }
 
-/** Structural sanity check for a Midnight address. Not a checksum. */
+/**
+ * Structural sanity check for a Midnight address. Not a checksum.
+ * Accepts both the wallet SDK's bech32m form (`mn_addr_preprod1…`)
+ * and the compact-form bech32 (`mn1…`); underscores are legal in the
+ * SDK's `mn_addr_<network>…` encoding.
+ */
 export function isPlausibleAddress(address: string): boolean {
   const a = address.trim();
   return (
     a.length >= 30 &&
     a.length <= 180 &&
-    /^[a-zA-Z0-9]+$/.test(a) &&
+    /^[a-zA-Z0-9_]+$/.test(a) &&
     /^m/.test(a)
   );
 }
