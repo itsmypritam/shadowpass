@@ -1,0 +1,28 @@
+preprod-users.json
+  s_7965b2df3e5e68::t_a38fe7c708dc26 4-425
+docs/USERS.md
+  s_7965b2df3e5e68::t_405d97fec37ac3 116-117
+docs/DEPLOY_PREPROD.md
+  s_7965b2df3e5e68::t_de658afc2a0f18 93
+  s_7965b2df3e5e68::t_0b054a6124fa3e 79-92,94-119
+README.md
+  s_7965b2df3e5e68::t_743d0cb056c829 515-520
+docs/preprod-users.md
+  s_7965b2df3e5e68::t_bf5bd2f6af6914 1-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "67ff7628c7f84ee5955aefcc5d6dbac5fcb1546e",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
