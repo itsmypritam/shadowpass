@@ -41,6 +41,11 @@ jobs:
       - name: Validate user registry
         run: npm run registry:validate
 
+      - name: Check exported user list is in sync
+        run: |
+          npm run registry -- export --out docs/preprod-users.md
+          git diff --exit-code docs/preprod-users.md
+
       - name: Build frontend
         run: npm run build:ui
 
