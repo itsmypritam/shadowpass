@@ -1,0 +1,26 @@
+scripts/sync-users.ts
+  s_7965b2df3e5e68::t_18012be531c783 104-133,135
+  s_7965b2df3e5e68::t_1e91888d78d03d 258,263-269,275
+  s_7965b2df3e5e68::t_403fb782564547 37-38
+  s_7965b2df3e5e68::t_4843ef37f9cdf5 172-173,177,183-186,192
+  s_7965b2df3e5e68::t_f80be9e347bf84 28
+  s_7965b2df3e5e68::t_2c027c12087303 1-26,29-36,39-103,134,136-171,174-176,178-182,187-191,193-257,259-262,270-274,276-311
+  s_7965b2df3e5e68::t_a990b10567c581 312-320
+  s_7965b2df3e5e68::t_804375e164061c 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9bf76730b34d53f0ee19b8a8a35ed2625327a018",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
