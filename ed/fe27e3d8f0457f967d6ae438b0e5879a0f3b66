@@ -1,0 +1,22 @@
+docs/OPERATIONS.md
+  s_7965b2df3e5e68::t_660ce79f02bf01 1-46,48-82,85-91,93-100
+  s_7965b2df3e5e68::t_3d5c1eae73550d 84
+  s_7965b2df3e5e68::t_87467a9ceebf4c 47
+  s_7965b2df3e5e68::t_1a84bc4c2f1d72 83,92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "edfe27e3d8f0457f967d6ae438b0e5879a0f3b66",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
