@@ -109,3 +109,25 @@ export async function trackUser(
   }
   return body;
 }
+
+/** Attribute one on-chain verification to the user's wallet. */
+export async function trackVerification(
+  walletAddress: string,
+): Promise<RegistryResponse> {
+  const res = await fetch('/api/track-verification', {
+    method: 'POST',
+    headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ walletAddress }),
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    throw new Error(body?.error ?? `Track verification failed with status ${res.status}`);
+  }
+  return body;
+}
+
+export async function getUsers(): Promise<UsersResponse> {
+  const res = await fetch('/api/users', { headers: API_HEADERS });
+  if (!res.ok) throw new Error(`Failed to load user registry: ${await res.text()}`);
+  return res.json();
+}
