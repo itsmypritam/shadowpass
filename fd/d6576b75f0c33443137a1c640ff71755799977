@@ -1,0 +1,21 @@
+docs/FEEDBACK.md
+  s_7965b2df3e5e68::t_fd9944822cf191 6
+  s_7965b2df3e5e68::t_f1fb69685b488b 1-5,7-71
+  s_7965b2df3e5e68::t_77cc75cd2a8efd 72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fdd6576b75f0c33443137a1c640ff71755799977",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
