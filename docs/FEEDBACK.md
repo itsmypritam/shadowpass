@@ -70,3 +70,53 @@ Triage rules:
    - **Minor** — polish, copy, edge cases.
    - **Nice-to-have** — new ideas for the roadmap.
 4. Close-with-reason: duplicates and out-of-scope items get a respectful close.
+
+## 4. Prioritize
+
+Every cycle the operator scores open items against the roadmap. The score is
+deliberately transparent and simple:
+
+```
+priority  = impact × (reach / effort) + strategic bonus
+```
+
+| Factor | Weights | Notes |
+| --- | --- | --- |
+| **Impact** | 3 (blocker) / 2 (major) / 1 (minor) | How broken or valuable |
+| **Reach** | fraction of users affected | `#` linked feedback reports |
+| **Effort** | 1 (hours) … 5 (weeks) | Reversed: low effort → higher score |
+| **Strategic bonus** | +0…2 | Privacy, Midnight-first, Level 5 goal |
+
+The resulting ranked list feeds **Roadmap** in the README; the top items are
+scheduled for the next cycle, each with the issue number it closes.
+
+## 5. Ship
+
+A feedback-driven change is done only when **all three** are true:
+
+1. Code ships in a focused commit/PR that **references the issue**.
+2. Documentation is updated in the **same** commit/PR.
+3. Tests (or a recorded manual verification) cover the change.
+
+The commit convention is `fix(#N):`, `feat(#N):` or `docs(#N):` where `N` is
+the GitHub issue number — traceability from user sentence to shipped code.
+
+## 6. Measure
+
+After each cycle:
+
+- `npm run registry -- analytics` → user count, verified count, feedback count,
+  average rating, rating distribution.
+- `npm run registry -- export` → the markdown table that lands in the README/deliverables.
+- Read the qualitative comments and re-run triage on anything un-addressed.
+
+> Note: `preprod-users.json` is committed, so every feedback entry and every
+> registry update is a **versioned, diffable artifact** — the loop is auditable.
+
+## 7. Feedback log
+
+Every feedback-driven change is appended here so the loop's output is visible.
+
+| Date | Issue | Request | Change | Shipped in |
+| --- | --- | --- | --- | --- |
+| _YYYY-MM-DD_ | #— | _what a user asked for_ | _what changed_ | _commit_ |
