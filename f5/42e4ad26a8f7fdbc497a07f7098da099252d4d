@@ -1,0 +1,32 @@
+tests/generate-wallets.test.ts
+  s_7965b2df3e5e68::t_5b1544bf4f0f71 48-49
+  s_7965b2df3e5e68::t_2b73eee4b5ae22 1-47,50-66
+package.json
+  s_7965b2df3e5e68::t_ac79c2f88bda30 24
+  s_7965b2df3e5e68::t_9c9d6bf8a58d36 25
+.gitignore
+  s_7965b2df3e5e68::t_f6df50b7db1bc4 70-72
+scripts/generate-wallets.ts
+  s_7965b2df3e5e68::t_78b3b6e845dfd8 16
+  s_7965b2df3e5e68::t_c3b5676cf22538 39-44
+  s_7965b2df3e5e68::t_263f4aedff637a 108-141
+  s_7965b2df3e5e68::t_5e0e91ef41d8e9 182-186,196-197
+  s_7965b2df3e5e68::t_0618f5bf4194d3 219-220,225-226,238-243,248,252-283,290-291,294,301-305
+  s_7965b2df3e5e68::t_600fe7bf7a8485 1-15,17-38,45-107,142-181,187-195,198-218,221-224,227-237,244-247,249-251,284-289,292-293,295-300,306-315
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f542e4ad26a8f7fdbc497a07f7098da099252d4d",
+  "prompts": {},
+  "sessions": {
+    "s_7965b2df3e5e68": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f4a3505aaffeP6oPIJNP0Pgs89",
+        "model": "unknown"
+      },
+      "human_author": "pritam dey <pritamsdev2@gmail.com>"
+    }
+  }
+}
