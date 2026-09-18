@@ -50,13 +50,39 @@ export interface FeedbackRequest {
   useCase?: string;
 }
 
-export interface FeedbackResponse {
-  ok: boolean;
+export interface RegistrySummary {
   userCount: number;
+  verifiedCount: number;
+  totalVerifications: number;
   feedbackCount: number;
+  avgRating: number | null;
+  ratingDistribution: Record<number, number>;
 }
 
-export async function submitFeedback(request: FeedbackRequest): Promise<FeedbackResponse> {
+export interface RegistryUser {
+  address: string;
+  firstSeenAt: string | null;
+  verifications: number;
+  verified: boolean;
+}
+
+export interface RegistryResponse extends RegistrySummary {
+  ok?: boolean;
+  added?: boolean;
+}
+
+export interface UsersResponse {
+  network: string;
+  registry: RegistryUser[];
+  summary: RegistrySummary;
+  explorerBase: string;
+  explorerUrl: string;
+  markdown: string;
+}
+
+export async function submitFeedback(
+  request: FeedbackRequest,
+): Promise<RegistryResponse> {
   const res = await fetch('/api/feedback', {
     method: 'POST',
     headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
@@ -69,7 +95,9 @@ export async function submitFeedback(request: FeedbackRequest): Promise<Feedback
   return body;
 }
 
-export async function trackUser(walletAddress: string): Promise<{ ok: boolean; userCount: number }> {
+export async function trackUser(
+  walletAddress: string,
+): Promise<RegistryResponse> {
   const res = await fetch('/api/track-user', {
     method: 'POST',
     headers: { ...API_HEADERS, 'Content-Type': 'application/json' },
